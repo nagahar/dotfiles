@@ -4,13 +4,16 @@ if [ ! -d $dropbox ]; then
     exit;
 else
     echo "########## Sync Dropbox Hook ################"
-    arr=(`git log -n 1 --name-only --oneline`)
+    tmptar=tmp.$$.tar
+    git log -n 1 --name-only --oneline | awk 'NR >= 2' | tar -cz -T - -f $tmptar
+    arr=(`git log -n 1 --name-only --oneline | awk 'NR >= 2'`)
     for a in ${arr[@]}
     do
-        if [ -f $a ]; then
-            echo "cp $a $dropbox"
-            cp $a $dropbox
-        fi
+        echo "copy $a -> $dropbox"
     done
+    if [ -f $tmptar ]; then
+        `mv $tmptar $dropbox; cd $dropbox; tar xfz $tmptar; rm $tmptar`
+    fi
     echo "############################################"
 fi
+
