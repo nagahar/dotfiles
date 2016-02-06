@@ -46,3 +46,16 @@ set clipboard+=unnamed
 "    silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 "endfunction
 
+" makeprg
+set makeprg=nmake
+
+" Tex
+let g:Tex_CompileRule_dvi = 'platex --kanji=utf8 -interaction=nonstopmode -shell-escape "$*"'
+let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
+let g:Tex_ViewRule_dvi = 'c:\w32tex\dviout\dviout.exe'
+if has('win64')
+    let g:Tex_ViewRule_pdf = 'c:\Program Files (x86)\SumatraPDF\SumatraPDF.exe'
+else
+    let g:Tex_ViewRule_pdf = 'c:\Program Files\SumatraPDF\SumatraPDF.exe'
+endif
+

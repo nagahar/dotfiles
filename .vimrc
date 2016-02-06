@@ -11,14 +11,6 @@ set guioptions+=M
 set guioptions-=m
 set guioptions-=T
 
-if has('win32') || has('win64')
-    source $CFGHOME/win.vimrc
-elseif has('mac')
-    source $CFGHOME/mac.vimrc
-elseif has('unix')
-    source $CFGHOME/unix.vimrc
-endif
-
 " neobundle
 " Note: Skip initialization for vim-tiny or vim-small.
 if !has('win32') && !has('win64')
@@ -225,6 +217,8 @@ set nobackup
 set noswapfile
 set nowritebackup
 
+" set undo dirs
+set undodir=$CFGHOME/undo
 " unset octal number
 set nrformats-=octal
 " time to type key
@@ -277,9 +271,9 @@ set title
 " print character encoding on status
 set laststatus=2
 if has('iconv')
-    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%{fugitive#statusline()}%=[0x%{GetB()}]\ (%v,%l)/%L%8P\ 
+    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%{fugitive#statusline()}%=[0x%{GetB()}]\ (%v,%l)/%L%8P\
 else
-    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%{fugitive#statusline()}%=\ (%v,%l)/%L%8P\ 
+    set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%{fugitive#statusline()}%=\ (%v,%l)/%L%8P\
 endif
 
 set display=lastline
@@ -291,32 +285,34 @@ endif
 
 set showtabline=1
 
+" cursor
+set cursorline
+set cursorcolumn
+
+"cursor shape
+if exists('$TMUX')
+    let &t_SI = "\ePtmux;\e\e]50;CursorShape=1\x7\e\\"
+    let &t_EI = "\ePtmux;\e\e]50;CursorShape=0\x7\e\\"
+elseif &term =~ "screen"
+    let &t_SI = "\eP\e]50;CursorShape=1\x7\e\\"
+    let &t_EI = "\eP\e]50;CursorShape=0\x7\e\\"
+else
+    let &t_SI = "\e]50;CursorShape=1\x7"
+    let &t_EI = "\e]50;CursorShape=0\x7"
+endif
+
 "----------------------------------------
 " coding style
 "----------------------------------------
 " textwidth
 set textwidth=80
-aug MyTextWidth
-    au!
-    autocmd FileType text setlocal tw=1000
-    autocmd FileType changelog setlocal tw=1000
-aug end
-
 " remove space in concatenating in Japanese
 set formatoptions+=mM
 
 " Use space 4 change@2014-12-27
 set tabstop=4 shiftwidth=4 softtabstop=0
-
-aug MyTabStop
-    au!
-    au BufRead,BufNewFile javascript setlocal tabstop=2 shiftwidth=2 softtabstop=0
-    au BufRead,BufNewFile json setlocal tabstop=2 shiftwidth=2 softtabstop=0
-aug end
 set shiftround
 set expandtab
-
-" indent
 set autoindent
 set smartindent
 
@@ -339,8 +335,7 @@ set gdefault
 "----------------------------------------
 " keymap
 "----------------------------------------
-
-" change the mapleader from \ to , 
+" change the mapleader from \ to ,
 let mapleader=","
 
 "----------------------------------------
@@ -349,12 +344,8 @@ let mapleader=","
 " unvalide forced save command
 "nnoremap ZZ <ESC>
 
-
 " change Vim command mode shortcut
 nnoremap ; :
-
-" very magic as default delete@2015-05-06
-"nnoremap /  /\v
 
 " unset highlight by using <ESC><ESC>
 nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>
@@ -376,15 +367,15 @@ nnoremap Q gqaq
 " search help
 nnoremap <F1> K
 " Open and close the NERD_tree.vim separately
-nnoremap <F2> :TrinityToggleNERDTree<CR>
+"nnoremap <F2> :TrinityToggleNERDTree<CR>
 nnoremap <F3> :source %<CR>
 "nnoremap <F4> :runtime macros/vimsh.vim<CR>
 " Open and close the srcexpl.vim separately
-nnoremap <F10> :TrinityToggleSourceExplorer<CR>
+"nnoremap <F10> :TrinityToggleSourceExplorer<CR>
 " Open and close the taglist.vim separately
-nnoremap <F11> :TrinityToggleTagList<CR>
+"nnoremap <F11> :TrinityToggleTagList<CR>
 " Open and close all the three plugins on the same time
-nnoremap <F12> :TrinityToggleAll<CR>
+"nnoremap <F12> :TrinityToggleAll<CR>
 " build tags of your own project with Ctrl-F12
 nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
@@ -437,21 +428,10 @@ nnoremap == gg=G2<C-o>
 "" Tabs
 "nnoremap <silent> <leader>tc :<C-u>tabnew<CR>:tabmove<CR>
 " create temporary file as tab
-nnoremap <leader>tc :<C-u>tabnew `=tempname()`<CR>
-
-
+nnoremap <silent> <leader>tc :<C-u>tabnew `=tempname()`<CR>
 nnoremap <silent> <leader>tk :<C-u>tabclose<CR>
 nnoremap <silent> <leader>tn :<C-u>tabnext<CR>
 nnoremap <silent> <leader>tp :<C-u>tabprevious<CR>
-
-"" FuzzyFinder.vim
-"nnoremap <silent> <leader>fb :<C-u>FufBuffer!<CR>
-"nnoremap <silent> <leader>ff :<C-u>FufFile! <C-r>=expand('%:~:.')[:-1-len(expand('%:~:.:t'))]<CR><CR>
-"nnoremap <silent> <leader>fm :<C-u>FufMruFile!<CR>
-"nnoremap <silent> <leader>tb :<C-u>tabnew<CR>:tabmove<CR>:FufBuffer!<CR>
-"nnoremap <silent> <leader>tf :<C-u>tabnew<CR>:tabmove<CR>:FufFile! <C-r>=expand('#:~:.')[:-1-len(expand('#:~:.:t'))]<CR><CR>
-"nnoremap <silent> <leader>tm :<C-u>tabnew<CR>:tabmove<CR>:FufMruFile!<CR>
-"
 
 " template
 nnoremap <leader>b :r $CFGHOME/template/bug.vim<CR>
@@ -482,14 +462,14 @@ nnoremap <silent> <leader>e8 :e ++enc=utf-8<CR>
 "----------------------------------------
 " insert mode
 "----------------------------------------
+" kill an input method (IME) after finishing insert mode
+inoremap <ESC> <ESC>:set iminsert=0<CR>
 inoremap {} {}<Left>
 inoremap [] []<Left>
 inoremap () ()<Left>
 inoremap "" ""<Left>
 inoremap '' ''<Left>
 inoremap <> <><Left>
-" kill an input method (IME) after finishing insert mode
-inoremap <ESC> <ESC>:set iminsert=0<CR>
 
 " vimshell
 inoremap <C-w><C-w> <ESC><C-w><C-w>
@@ -498,23 +478,16 @@ inoremap <C-w> <Nop>
 "----------------------------------------
 " visual mode
 "----------------------------------------
+" change Vim command mode shortcut
+vnoremap ; :
 " close foldings by h at start of line
 vnoremap <expr> h col('.') == 1 && foldlevel(line('.')) > 0 ? 'zcgv' : 'h'
 " open foldings by l at start of line
 vnoremap <expr> l foldclosed(line('.')) != -1 ? 'zogv0' : 'l'
 " format a paragraph
 vnoremap Q gq
-" change Vim command mode shortcut
-vnoremap ; :
-
 vnoremap ) t)
 vnoremap ( t(
-
-" counter
-vnoremap <silent> <C-a> :ContinuousNumber <C-a><CR>
-vnoremap <silent> <C-x> :ContinuousNumber <C-x><CR>
-
-command! -count -nargs=1 ContinuousNumber let c = col('.')|for n in range(1, <count>?<count>-line('.'):1)|exec 'normal! j' . n . <q-args>|call cursor('.', c)|endfor
 
 "----------------------------------------
 " command mode
@@ -524,6 +497,7 @@ cnoremap <C-l> <Right>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-d> <Del>
+" Save file as sudo
 cnoremap w!! w !sudo tee % >/dev/null
 
 "----------------------------------------
@@ -532,13 +506,9 @@ cnoremap w!! w !sudo tee % >/dev/null
 onoremap ) t)
 onoremap ( t(
 
-" for SKK
-"cnoremap <C-j> <Nop>
-
 "----------------------------------------
 " Command-line window
 "----------------------------------------
-
 nnoremap <sid>(command-line-enter) q:
 xnoremap <sid>(command-line-enter) q:
 nnoremap <sid>(command-line-norange) q:<C-u>
@@ -548,8 +518,10 @@ nmap ; <sid>(command-line-enter)
 xmap : <sid>(command-line-enter)
 xmap ; <sid>(command-line-enter)
 
-
-autocmd CmdwinEnter * call s:init_cmdwin()
+aug MyCmdwinEnter
+    au!
+    au CmdwinEnter * call s:init_cmdwin()
+aug END
 
 function! s:init_cmdwin()
     nnoremap <buffer> q :<C-u>quit<CR>
@@ -563,24 +535,14 @@ function! s:init_cmdwin()
     startinsert!
 endfunction
 
-
 "----------------------------------------
 " Vim script
 "----------------------------------------
 
-"""""""""""""""""""""""
-" To avoid using IME in normal mode
-"""""""""""""""""""""""
-"aug InsModeAu
-"    au!
-"    au InsertEnter,CmdwinEnter * set noimdisable
-"    au InsertLeave,CmdwinLeave * set imdisable
-"aug END
-
 """"""""""""""""""""""""""""""
 " move cursur to previouse position
 """"""""""""""""""""""""""""""
-augroup vimrcEx
+augroup MyMoveCursur
     autocmd!
     autocmd BufReadPost *
                 \ if line("'\"") > 1 && line("'\"") <= line('$') |
@@ -681,26 +643,55 @@ func! MyEMinutesTemplate()
     r $CFGHOME/template/eminutes.vim
 endfunc
 
+""""""""""""""""""""""""""""""
+" My File Types
+""""""""""""""""""""""""""""""
 " ActionScript
-au BufNewFile,BufRead *.as	set filetype=actionscript
-au FileType actionscript :set dictionary=$CFGHOME/dict/actionscript.dict
-
+aug MyActionScript
+    au!
+    au BufNewFile,BufRead *.as setf actionscript
+    au FileType actionscript set dictionary=$CFGHOME/dict/actionscript.dict
+aug END
 " Mxml
-au BufNewFile,BufRead *.mxml	set filetype=mxml
-
+aug MyMxml
+    au!
+    au BufNewFile,BufRead *.mxml setf mxml
+aug END
 " Plantuml syntax
-au BufNewFile,BufRead *.puml	setf plantuml
-
+aug MyPlantuml
+    au!
+    au BufNewFile,BufRead *.puml setf plantuml
+aug END
 " ChangeLog
 augroup MyChangeLog
-    "autocmd!
+    autocmd!
     autocmd BufRead,BufCreate,BufNew LifeLog.txt setf changelog
 augroup END
+" EJS
+aug MyEjs
+    au!
+    au BufNewFile,BufRead *.ejs setf html
+aug END
 
+""""""""""""""""""""""""""""""
+" My File Type Config
+""""""""""""""""""""""""""""""
+" tabstop
+aug MyTabStop
+    au!
+    au BufRead,BufNewFile javascript setlocal tabstop=2 shiftwidth=2 softtabstop=0
+    au BufRead,BufNewFile json setlocal tabstop=2 shiftwidth=2 softtabstop=0
+aug END
+" Text
+aug MyTextWidth
+    au!
+    autocmd FileType text setlocal tw=1000
+    autocmd FileType changelog setlocal tw=1000
+aug END
 " Binary
-"au BufReadPost,BufNewFile *.bin,*.exe,*.dll,*.lib,*.so setlocal filetype=xxd
 augroup Binary
     au!
+    au BufReadPost,BufNewFile *.bin,*.exe,*.dll,*.lib,*.so setf xxd
     au BufReadPre  *.bin,*.exe,*.dll,*.lib,*.so let &bin=1
     au BufReadPost *.bin,*.exe,*.dll,*.lib,*.so if &bin | %!xxd
     au BufReadPost *.bin,*.exe,*.dll,*.lib,*.so set ft=xxd | endif
@@ -709,18 +700,6 @@ augroup Binary
     au BufWritePost *.bin,*.exe,*.dll,*.lib,*.so if &bin | %!xxd
     au BufWritePost *.bin,*.exe,*.dll,*.lib,*.so set nomod | endif
 augroup END
-
-" xmllint
-if executable('xmllint')
-    if has('win32') || has('win64')
-        au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>null"
-    else
-        au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
-    endif
-endif
-
-" ejs
-au BufNewFile,BufRead *.ejs set filetype=html
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " enbale snipMate.vim in autocomplpop.vim
@@ -739,49 +718,53 @@ au BufNewFile,BufRead *.ejs set filetype=html
 "let g:snips_author = 'Takanori Nagahara'
 
 " Tag completion
-au Filetype xml inoremap <buffer> </ </<C-x><C-o>
-au Filetype html inoremap <buffer> </ </<C-x><C-o>
-au Filetype changelog inoremap <buffer> </ </<C-x><C-o>
+aug MyTagComplete
+    au!
+    au Filetype xml inoremap <buffer> </ </<C-x><C-o>
+    au Filetype html inoremap <buffer> </ </<C-x><C-o>
+    au Filetype changelog inoremap <buffer> </ </<C-x><C-o>
+aug END
 
 " configure tags - add additional tags here or comment out not-used ones
-if has('win32') || has('win64')
-    set tags+=~/vimfiles/tags/cpp
-else
-    set tags+=~/.vim/tags/cpp
-    "set tags+=~/.vim/tags/gl
-    "set tags+=~/.vim/tags/sdl
-    "set tags+=~/.vim/tags/qt4
-end
+set tags+=~$CFGHOME/tags/cpp
+"set tags+=~/.vim/tags/gl
+"set tags+=~/.vim/tags/sdl
+"set tags+=~/.vim/tags/qt4
 
 if has('path_extra')
     set tags+=tags;
 end
 
+""""""""""""""""""""""""""""""
 " omnifunc
-au FileType python set omnifunc=pythoncomplete#Complete
-au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-au FileType html set omnifunc=htmlcomplete#CompleteTags
-au FileType css set omnifunc=csscomplete#CompleteCSS
-au FileType xml set omnifunc=xmlcomplete#CompleteTags
-au FileType php set omnifunc=phpcomplete#CompletePHP
-au FileType sql set omnifunc=sqlcomplete#CompleteTags
-au FileType changelog set omnifunc=htmlcomplete#CompleteTags
-if has('win32') || has('win64')
-    au FileType c set omnifunc=syntaxcomplete#Complete
-else
-    au FileType c set omnifunc=ccomplete#Complete
-endif
-au FileType *
-            \   if &l:omnifunc == ''
-            \ |   setl omnifunc=syntaxcomplete#Complete
-            \ | endif
+""""""""""""""""""""""""""""""
+aug MyOmniFunc
+    au!
+    au FileType python set omnifunc=pythoncomplete#Complete
+    au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    au FileType html set omnifunc=htmlcomplete#CompleteTags
+    au FileType css set omnifunc=csscomplete#CompleteCSS
+    au FileType xml set omnifunc=xmlcomplete#CompleteTags
+    au FileType php set omnifunc=phpcomplete#CompletePHP
+    au FileType sql set omnifunc=sqlcomplete#CompleteTags
+    au FileType changelog set omnifunc=htmlcomplete#CompleteTags
+    if has('win32') || has('win64')
+        au FileType c set omnifunc=syntaxcomplete#Complete
+    else
+        au FileType c set omnifunc=ccomplete#Complete
+    endif
+    au FileType *
+                \   if &l:omnifunc == ''
+                \ |   setl omnifunc=syntaxcomplete#Complete
+                \ | endif
 
-" C/C++/Objective-C add@2014-12-27
-au FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-au FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-" if you install vim-operator-user
-au FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
-au FileType c,cpp,objc set tabstop=2 shiftwidth=2 softtabstop=0
+    " C/C++/Objective-C add@2014-12-27
+    au FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+    au FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+    " if you install vim-operator-user
+    au FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+    au FileType c,cpp,objc set tabstop=2 shiftwidth=2 softtabstop=0
+aug END
 
 
 "To enable neocomplete delete@2015-12-21
@@ -805,7 +788,9 @@ au FileType c,cpp,objc set tabstop=2 shiftwidth=2 softtabstop=0
 "            \ | endif
 
 
+""""""""""""""""""""""""""""""
 " OmniCppComplete
+""""""""""""""""""""""""""""""
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
@@ -814,134 +799,64 @@ let OmniCpp_MayCompleteDot = 1 " autocomplete after .
 let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+
+""""""""""""""""""""""""""""""
 " autocomplpop
+""""""""""""""""""""""""""""""
 " automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+aug MyAutoComplPop
+    au!
+    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+aug END
 set completeopt=menuone,menu,longest,preview
 
+""""""""""""""""""""""""""""""
 " TOhtml
-let html_number_lines = 0
-let html_no_pre = 1
-let html_use_encoding = "utfｰ8"
+""""""""""""""""""""""""""""""
+"let html_number_lines = 0
+"let html_no_pre = 1
+"let html_use_encoding = "utfｰ8"
 
+""""""""""""""""""""""""""""""
 " vim-latex
+""""""""""""""""""""""""""""""
 " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
 " can be called correctly.
 set shellslash
-
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
 " program to always generate a file-name.
 set grepprg=grep\ -nH\ $*
-
 " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor = 'latex'
-
 let g:Tex_BibtexFlavor = 'jbibtex'
-
 let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-
 let g:Tex_DefaultTargetFormat = 'pdf'
-
 let g:Tex_GotoError = '0'
 
-if has('win32') || has('win64')
-    let g:Tex_CompileRule_dvi = 'platex --kanji=utf8 -interaction=nonstopmode -shell-escape "$*"'
-    let g:Tex_CompileRule_pdf = 'dvipdfmx $*.dvi'
-    let g:Tex_ViewRule_dvi = 'c:\w32tex\dviout\dviout.exe'
-    if has('win64')
-        let g:Tex_ViewRule_pdf = 'c:\Program Files (x86)\SumatraPDF\SumatraPDF.exe'
-    else
-        let g:Tex_ViewRule_pdf = 'c:\Program Files\SumatraPDF\SumatraPDF.exe'
-    endif
-elseif has('mac')
-    let g:Tex_CompileRule_dvi = '/opt/local/bin/platex-utf8 -interaction=nonstopmode -shell-escape $*'
-    let g:Tex_CompileRule_pdf = '/opt/local/bin/dvipdfmx $*.dvi'
-    let g:Tex_ViewRule_pdf = 'open -a /Applications/Preview.app'
-else
-    let g:Tex_CompileRule_dvi = '/usr/local/teTeX/bin/platex --kanji=utf8 -interaction=nonstopmode -shell-escape $*'
-    let g:Tex_CompileRule_pdf = '/usr/local/teTeX/bin/dvipdfmx $*.dvi'
-    let g:Tex_ViewRule_pdf = '/usr/bin/evince'
-endif
-
+""""""""""""""""""""""""""""""
 " vimgrep
-au QuickfixCmdPost vimgrep cw
+""""""""""""""""""""""""""""""
+aug MyVimGrep
+    au!
+    au QuickfixCmdPost vimgrep cw
+aug END
 
-" vimsh
-" in order to use VimShell delete@2015-05-06
-"let g:vimsh_prompt_override = 1 "will not use normal prompt from your 'real' shell
-"let g:vimsh_prompt_pty = "%m%#" "specify overriden prompt
-"let g:vimsh_split_open = 1 "don't run vimsh in the current buffer
-"if has('win32') || has('win64')
-"    let g:vimsh_sh = "c:/cygwin/bin/zsh.exe" "shell to run within vimsh
-"else
-"    let g:vimsh_sh = "/bin/zsh" "shell to run within vimsh
-"endif
-
-" conque_term
-"k" Enable colors. Setting this to 0 will make your terminal faster.
-"klet g:ConqueTerm_Color = 1
-"k" Set your terminal type. I strong recommend leaving this as vt100, 
-"k" however more features may be enabled with xterm.
-"klet g:ConqueTerm_TERM = 'vt100'
-"k" Set buffer syntax. Conque has highlighting for MySQL, but not much else.
-"klet g:ConqueTerm_Syntax = 'conque'
-"k" Continue updating shell when it's not the current, focused buffer
-"klet g:ConqueTerm_ReadUnfocused = 1
-"k" Exit buffer with <C-w> in insert mode
-"klet g:ConqueTerm_CWInsert = 1
-
+""""""""""""""""""""""""""""""
 " Use pathogen to easily modify the runtime path to include all
 " plugins under the ~/.vim/bundle directory
+""""""""""""""""""""""""""""""
 "if !has('win32') && !has('windows')
 "call pathogen#runtime_append_all_bundles()
 "call pathogen#helptags()
 "endif
 call pathogen#infect()
 
-" makeprg
-if has('win32') || has('win64')
-    set makeprg=nmake
-endif
-
-" virtualedit
-"set virtualedit=all
-"if has('virtualedit') && &virtualedit =~# '\<all\>'
-"	nnoremap <expr> p (col('.') >= col('$') ? '$' : '') . 'p'
-"endif
-
-" cursor
-set cursorline
-set cursorcolumn
-
-
-" slimv
-if has('mac')
-    "let g:vimshell_editor_command = '/usr/local/Cellar/macvim-kaoriya/HEAD/MacVim.app/Contents/MacOS/Vim --servername=VIM --remote-tab-wait-silent'
-    let g:vimshell_editor_command = '/Applications/MacVim.app/Contents/MacOS/Vim --servername=VIM --remote-tab-wait-silent'
-    let g:slimv_lisp = '/usr/local/bin/ccl64'
-    let g:slimv_impl = 'clozure'
-    let g:slimv_preferred = 'clozure'
-    let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"ccl64 --load ~/.vim/bundle/slimv/slime/start-swank.lisp\""'
-    let g:paredit_mode = 0
-endif
-
-
-"cursor shape
-if exists('$TMUX')
-    let &t_SI = "\ePtmux;\e\e]50;CursorShape=1\x7\e\\"
-    let &t_EI = "\ePtmux;\e\e]50;CursorShape=0\x7\e\\"
-elseif &term =~ "screen"
-    let &t_SI = "\eP\e]50;CursorShape=1\x7\e\\"
-    let &t_EI = "\eP\e]50;CursorShape=0\x7\e\\"
-else
-    let &t_SI = "\e]50;CursorShape=1\x7"
-    let &t_EI = "\e]50;CursorShape=0\x7"
-endif
-
+""""""""""""""""""""""""""""""
 " clang-format add@2014-12-27
+""""""""""""""""""""""""""""""
 let g:clang_format#style_options = {
             \ "AccessModifierOffset" : -4,
             \ "AllowShortIfStatementsOnASingleLine" : "true",
@@ -949,10 +864,9 @@ let g:clang_format#style_options = {
             \ "Standard" : "C++11",
             \ "BreakBeforeBraces" : "Stroustrup"}
 
-" set undo dirs
-set undodir=$CFGHOME/undo
-
+""""""""""""""""""""""""""""""
 " syntastic
+""""""""""""""""""""""""""""""
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -961,8 +875,19 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {
-             \ "mode" : "active",
-             \ "active_filetypes" : ["javascript", "json"],
-             \}
+            \ "mode" : "active",
+            \ "active_filetypes" : ["javascript", "json"],
+            \}
+
+""""""""""""""""""""""""""""""
+" load OS config
+""""""""""""""""""""""""""""""
+if has('win32') || has('win64')
+    source $CFGHOME/win.vimrc
+elseif has('mac')
+    source $CFGHOME/mac.vimrc
+elseif has('unix')
+    source $CFGHOME/unix.vimrc
+endif
 
 
