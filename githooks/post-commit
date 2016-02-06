@@ -5,7 +5,7 @@ if [ ! -d $dropbox ]; then
 else
     echo "########## Sync Dropbox Hook ################"
     tmptar=tmp.$$.tar
-    git log -n 1 --name-only --oneline | awk 'NR >= 2' | tar -cz -T - -f $tmptar
+    git log -n 1 --name-only --oneline | awk 'NR >= 2 && !/^.gitignore/' | tar -cz -T - -f $tmptar
     arr=(`git log -n 1 --name-only --oneline | awk 'NR >= 2'`)
     for a in ${arr[@]}
     do
