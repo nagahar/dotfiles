@@ -1,4 +1,5 @@
 # ignore files
 .vim/bundle/
 .netrwhist
+*.tar
 

@@ -6,7 +6,7 @@ else
     echo "########## Sync Dropbox Hook ################"
     tmptar=tmp.$$.tar
     files="$(git log -n 1 --name-only --oneline | awk 'NR >= 2 && !/^.gitignore/')"
-    echo $files | tar -cz -T - -f $tmptar
+    echo "$files" | tar -cz -T - -f $tmptar
     for a in ${files[@]}
     do
         echo "copy $a -> $dropbox"
