@@ -1,0 +1,37 @@
+" change Vim command mode shortcut
+nnoremap ; :
+vnoremap ; :
+
+" unset highlight by using <ESC><ESC>
+nnoremap <Esc><Esc> :nohlsearch<return><Esc>
+nnoremap h <Left>
+nnoremap j gj
+nnoremap k gk
+nnoremap l <Right>
+nnoremap <Down> gj
+nnoremap <Up>   gk
+" close foldings by h at start of line
+nnoremap <expr> h col('.') == 1 && foldlevel(line('.')) > 0 ? 'zc' : 'h'
+" open foldings by l at start of line
+nnoremap <expr> l foldclosed(line('.')) != -1 ? 'zo0' : 'l'
+" format a paragraph
+nnoremap Q gqaq
+
+" window
+nnoremap <leader>swh :topleft  vnew<CR>
+nnoremap <leader>swl :botright vnew<CR>
+nnoremap <leader>swk :topleft  new<CR>
+nnoremap <leader>swj :botright new<CR>
+
+" buffer
+nnoremap <leader>sh :leftabove  vnew<CR>
+nnoremap <leader>sl :rightbelow vnew<CR>
+nnoremap <leader>sk :leftabove  new<CR>
+nnoremap <leader>sj :rightbelow new<CR>
+
+nnoremap == gg=G2<C-o>
+
+map <C-S-c> gS:vsc Edit.CommentSelection<CR>
+map <C-A-c> gS:vsc Edit.UncommentSelection<CR>
+map <C-S-A-f> gS:vsc ReSharper.FindUsages<CR
+
