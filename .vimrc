@@ -12,11 +12,11 @@ set guioptions-=m
 set guioptions-=T
 
 if has('win32') || has('win64')
-    source $CFGHOME.'/win.vimrc'
+    source $CFGHOME/win.vimrc
 elseif has('mac')
-    source $CFGHOME.'/mac.vimrc'
+    source $CFGHOME/mac.vimrc
 elseif has('unix')
-    source $CFGHOME.'/unix.vimrc'
+    source $CFGHOME/unix.vimrc
 endif
 
 " neobundle
