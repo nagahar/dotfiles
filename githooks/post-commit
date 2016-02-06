@@ -3,6 +3,7 @@ dropbox=~/Dropbox/Documents/env/
 if [ ! -d $dropbox ]; then
     exit;
 else
+    echo "########## Sync Dropbox Hook ################"
     arr=(`git log -n 1 --name-only --oneline`)
     for a in ${arr[@]}
     do
@@ -11,4 +12,5 @@ else
             cp $a $dropbox
         fi
     done
+    echo "############################################"
 fi

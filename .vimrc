@@ -1,37 +1,23 @@
-set guioptions+=M
-set guioptions-=m
-set guioptions-=T
-
 "----------------------------------------
 " system configuration
 "----------------------------------------
-
 if has('win32') || has('win64')
     let $CFGHOME=$HOME.'/vimfiles'
 else
     let $CFGHOME=$HOME.'/.vim'
 endif
 
-""""""""""""""""""""""""""""""
-"Kaoriya版に添付されているプラグインの無効化
-"問題があるものもあるので一律に無効化します。
-"ファイルを参照(コメント部分で gf を実行)した上で、必要なプラグインは
-"let plugin_..._disableの設定行をコメント化(削除)して有効にして下さい。
-""""""""""""""""""""""""""""""
-"$VIM/plugins/kaoriya/autodate.vim
-"let plugin_autodate_disable  = 1
-"$VIM/plugins/kaoriya/cmdex.vim
-let plugin_cmdex_disable     = 1
-"$VIM/plugins/kaoriya/dicwin.vim
-let plugin_dicwin_disable    = 1
-"$VIMRUNTIME/plugin/format.vim
-let plugin_format_disable    = 1
-"$VIM/plugins/kaoriya/hz_ja.vim
-let plugin_hz_ja_disable     = 1
-"$VIM/plugins/kaoriya/scrnmode.vim
-let plugin_scrnmode_disable  = 1
-"$VIM/plugins/kaoriya/verifyenc.vim
-let plugin_verifyenc_disable = 1
+set guioptions+=M
+set guioptions-=m
+set guioptions-=T
+
+if has('win32') || has('win64')
+    source $CFGHOME.'/win.vimrc'
+elseif has('mac')
+    source $CFGHOME.'/mac.vimrc'
+elseif has('unix')
+    source $CFGHOME.'/unix.vimrc'
+endif
 
 " neobundle
 " Note: Skip initialization for vim-tiny or vim-small.
@@ -186,102 +172,19 @@ if !has('win32') && !has('win64')
     endif
 endif
 
-"set nocompatible
 set complete+=k
 set browsedir=buffer
 
-
-" add@2016-02-06
 set fileencodings=iso-2022-jp-3,iso-2022-jp,euc-jisx0213,euc-jp,utf-8,ucs-bom,euc-jp,eucjp-ms,cp932
-if has('win32') || has('win64')
-    set encoding=cp932
-endif
-" delete@2016-02-06
-" auto recognition for character encoding
-"if has('win32') || has('win64')
-"    set enc=utf-8
-"endif
-"if &encoding !=# 'utf-8'
-"    set encoding=japan
-"    set fileencoding=japan
-"endif
-"if has('iconv')
-"    let s:enc_euc = 'euc-jp'
-"    let s:enc_jis = 'iso-2022-jp'
-"    if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-"        let s:enc_euc = 'eucjp-ms'
-"        let s:enc_jis = 'iso-2022-jp-3'
-"    elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-"        let s:enc_euc = 'euc-jisx0213'
-"        let s:enc_jis = 'iso-2022-jp-3'
-"    endif
-"    if &encoding ==# 'utf-8'
-"        let s:fileencodings_default = &fileencodings
-"        let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-"        let &fileencodings = &fileencodings .','. s:fileencodings_default
-"        unlet s:fileencodings_default
-"    else
-"        let &fileencodings = &fileencodings .','. s:enc_jis
-"        set fileencodings+=utf-8,ucs-2le,ucs-2
-"        if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-"            set fileencodings+=cp932
-"            set fileencodings-=euc-jp
-"            set fileencodings-=euc-jisx0213
-"            set fileencodings-=eucjp-ms
-"            let &encoding = s:enc_euc
-"            let &fileencoding = s:enc_euc
-"        else
-"            let &fileencodings = &fileencodings .','. s:enc_euc
-"        endif
-"    endif
-"    unlet s:enc_euc
-"    unlet s:enc_jis
-"endif
-
-if has('autocmd')
-    function! AU_ReCheck_FENC()
-        if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-            let &fileencoding=&encoding
-        endif
-    endfunction
-    autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
-
 set fileformats=unix,dos,mac
 if exists('&ambiwidth')
     set ambiwidth=double
 endif
 
-" backup
-"if has('win32')
-"	set directory=$TMP
-"	set backupdir=$TMP
-"else
-"	set directory=$HOME/.vimbackup
-"	set backupdir=$HOME/.vimbackup
-"endif
-
 set nobackup
 set noswapfile
 set nowritebackup
 
-"viminfo
-"set viminfo=
-
-if has('win32') || has('win64') || has('mac')
-    " shared clipboard
-    set clipboard+=unnamed
-endif
-
-" change directory automaticaly for rgrep,tags
-"set autochdir
-if has("autochdir")
-    " moive directory in editing
-    set autochdir
-    set tags=tags;
-else
-    set tags=./tags,./../tags,./*/tags,./../../tags,./../../../tags,./../../../../tags,./../../../../../tags
-endif
 " unset octal number
 set nrformats-=octal
 " time to type key
@@ -309,25 +212,9 @@ endif
 " foldmethod
 set foldmethod=syntax
 
-" ctags
-if has('win32') || has('win64')
-    let Tlist_Ctags_Cmd = 'c:\ctags\ctags.exe'
-endif
-
 "----------------------------------------
 " display configuration
 "----------------------------------------
-"colorscheme mycolor
-"colorscheme desert
-"colorscheme desertExMe
-if has('win32') || has('win64')
-    "colorscheme desert
-else
-    colorscheme mrkn256
-    "colorscheme desert
-endif
-
-
 " don't display splash
 set shortmess+=I
 " no bell
@@ -368,30 +255,36 @@ set showtabline=1
 " coding style
 "----------------------------------------
 " textwidth
-set textwidth=1000
-autocmd BufRead *.{c,cpp,h,cs,js,java,hs,lisp,scm,rb,pl,py,php,sh,md,css,vim} set tw=80
+set textwidth=80
+aug MyTextWidth
+    au!
+    autocmd FileType text setlocal tw=1000
+    autocmd FileType changelog setlocal tw=1000
+aug end
 
 " remove space in concatenating in Japanese
 set formatoptions+=mM
 
-" tab
 " Use space 4 change@2014-12-27
 set tabstop=4 shiftwidth=4 softtabstop=0
+
+aug MyTabStop
+    au!
+    au BufRead,BufNewFile javascript setlocal tabstop=2 shiftwidth=2 softtabstop=0
+    au BufRead,BufNewFile json setlocal tabstop=2 shiftwidth=2 softtabstop=0
+aug end
 set shiftround
 set expandtab
 
 " indent
 set autoindent
 set smartindent
-"set cindent
-set cinoptions+=:0
 
 "----------------------------------------
 " search
 "----------------------------------------
 " no case ignore
 set noignorecase
-"set smartcase
 
 set wrapscan
 set incsearch
@@ -399,42 +292,6 @@ set incsearch
 "set iskeyword=a-z,A-Z,48-57,_,.,-,>
 "vimgrep をデフォルトのgrepとする場合internal
 set grepprg=internal
-if has('win32') || has('win64')
-    set diffexpr=MyDiff()
-    function! MyDiff()
-        let opt = '-a --binary '
-        if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-        if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-        let arg1 = v:fname_in
-        if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-        let arg2 = v:fname_new
-        if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-        let arg3 = v:fname_out
-        if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-        let eq = ''
-        if $VIMRUNTIME =~ ' '
-            if &sh =~ '\<cmd'
-                let cmd = '""' . $VIMRUNTIME . '\diff"'
-                let eq = '"'
-            else
-                let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-            endif
-        else
-            let cmd = $VIMRUNTIME . '\diff'
-        endif
-        silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-    endfunction
-endif
-
-" print diff of current buffer
-command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
-" print diff by specifing the buffer number includeding '#'
-command! -nargs=? -complete=file Diff if '<args>'=='' | browse vertical diffsplit|else| vertical diffsplit <args>|endif
-
-set patchexpr=MyPatch()
-function! MyPatch()
-    :call system($VIM."\\'.'patch -o " . v:fname_out . " " . v:fname_in . " < " . v:fname_diff)
-endfunction
 
 " set 'g' option as default in using substitute
 set gdefault
@@ -1068,6 +925,4 @@ let g:syntastic_mode_map = {
              \ "active_filetypes" : ["javascript", "json"],
              \}
 
-au BufRead,BufNewFile *.js set tabstop=2 shiftwidth=2 softtabstop=0
-au BufRead,BufNewFile *.json set tabstop=2 shiftwidth=2 softtabstop=0
 
