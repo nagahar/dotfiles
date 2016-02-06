@@ -20,5 +20,6 @@ elif [ `uname` = "Linux" ];then
 else
     ln -s ./.zshrc.cygwin ~/.zshrc.cygwin.sh
 fi
-ln -s ./githooks/post-commit .git/hooks/post-commit
+chmod +x ./githooks/post-commit
+cp ./githooks/post-commit .git/hooks/
 
