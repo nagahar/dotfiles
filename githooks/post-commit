@@ -1,0 +1,14 @@
+#!/bin/sh
+dropbox=~/Dropbox/Documents/env/
+if [ ! -d $dropbox ]; then
+    exit;
+else
+    arr=(`git log -n 1 --name-only --oneline`)
+    for a in ${arr[@]}
+    do
+        if [ -f $a ]; then
+            echo "cp $a $dropbox"
+            cp $a $dropbox
+        fi
+    done
+fi
