@@ -1,0 +1,51 @@
+"1.0b2 (created: 2010/10/02 22:50:54)
+
+highlight Bell display: none;
+map -modes=n,v -builtin j 5j
+map -modes=n,v -builtin k 5k
+map -modes=n,v -builtin h <A-Left>
+map -modes=n,v -builtin l <A-Right>
+map -modes=n,v -builtin p <Nop>
+map -modes=n,v -builtin -silent <Esc><Esc> :nohlsearch<Return><Esc>
+map -modes=n,v -builtin ZZ <Esc>
+map -modes=n,v -builtin d D
+map -modes=n,v -builtin ; :
+map -modes=n,v ,m,s :so<Space>$RUNTIME/plugin/multi_requester.js
+map -modes=i -builtin -silent <C-h> <Left>
+map -modes=i -builtin -silent <C-l> <Right>
+map -modes=i -builtin -silent <C-a> <Home>
+map -modes=i -builtin -silent <C-e> <End>
+map -modes=i -builtin -silent <C-d> <Del>
+map -modes=i -builtin -silent <C-o>p <S-Insert>
+map -modes=n,v -builtin [object\ ChromeWindow] 5j
+map -modes=n,v -builtin [object\ ChromeWindow] 5k
+map -modes=n,v -builtin [object\ ChromeWindow] <A-Left>
+map -modes=n,v -builtin [object\ ChromeWindow] <A-Right>
+map -modes=n,v -builtin [object\ ChromeWindow] <Nop>
+map -modes=n,v -builtin -silent [object\ ChromeWindow] :nohlsearch<Return><Esc>
+map -modes=n,v -builtin [object\ ChromeWindow] <Esc>
+map -modes=n,v -builtin [object\ ChromeWindow] D
+map -modes=n,v [object\ ChromeWindow] :so<Space>$RUNTIME/plugin/multi_requester.js
+map -modes=c -builtin <C-p> <Up>
+map -modes=c -builtin <C-n> <Down>
+map -modes=c -builtin -silent <C-o>p <S-Insert>
+map -modes=c -builtin <C-j> <Nop>
+map -modes=i -builtin -silent [object\ ChromeWindow] <Left>
+map -modes=i -builtin -silent [object\ ChromeWindow] <Right>
+map -modes=i -builtin -silent [object\ ChromeWindow] <Home>
+map -modes=i -builtin -silent [object\ ChromeWindow] <End>
+map -modes=i -builtin -silent [object\ ChromeWindow] <Del>
+map -modes=i -builtin -silent [object\ ChromeWindow] <S-Insert>
+set activate=quickmark,paste,tabopen
+set complete=''
+set guioptions=mBTbnr
+set hlsearch
+set newtab=all
+set runtimepath=/Users/nagahara/.pentadactyl
+set showstatuslinks=2
+set titlestring=Firefox
+set verbose=5
+set visualbell
+set hintkeys
+
+" vim: set ft=pentadactyl:

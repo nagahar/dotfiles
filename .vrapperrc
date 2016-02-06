@@ -1,0 +1,23 @@
+"----------------------------------------
+" keymap
+"----------------------------------------
+
+" change Vim command mode shortcut
+nnoremap ; :
+
+
+" format a paragraph
+nnoremap Q gqaq
+nnoremap == gg=G2<C-o>
+
+
+"----------------------------------------
+" visual mode
+"----------------------------------------
+
+" format a paragraph
+vnoremap Q gq
+" change Vim command mode shortcut
+vnoremap ; :
+
+

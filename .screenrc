@@ -1,0 +1,71 @@
+escape ^t^t
+shelltitle "$ |zsh"
+autodetach on
+defkanji utf-8
+defencoding utf-8
+encoding utf-8 utf-8
+defscrollback 10000
+startup_message off
+#zombie "d^M"
+vbell off
+
+# caption and hardstatus
+caption always "%?%F%{= wk}%?%3n %t %= %{=b wk} [%l] %{=b wb}%y/%m/%d %{=b wm}%c"
+hardstatus alwayslastline " %`%-w%{=b bw}%n %t%{-}%+w"
+
+# split overwirte
+bind s eval 'split' 'focus' 'prev'
+
+# vertical split overwirte
+bind v eval 'vert_split' 'focus' 'prev'
+
+# only window
+bind o only
+
+# region focus(like vi)
+bind j focus down
+bind k focus up
+bind t focus top
+bind b focus bottom
+
+# continuous region focus(like vi)
+bind ^J eval 'focus down' 'echo "Focus region: "' 'command -c cfocus'
+bind ^K eval 'focus up' 'echo "Focus region: "' 'command -c cfocus'
+bind -c cfocus ^J eval 'focus down' 'echo "Focus region: "' 'command -c cfocus'
+bind -c cfocus ^K eval 'focus up' 'echo "Focus region: "' 'command -c cfocus'
+
+# continuous resion resize.
+# orverride default `r'(wrap) mapping.
+bind r eval 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize j eval 'resize +1' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize k eval 'resize -1' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize J eval 'resize +10' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize K eval 'resize -10' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 1 eval 'resize 10' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 2 eval 'resize 20' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 3 eval 'resize 30' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 4 eval 'resize 40' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 6 eval 'resize 50' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 6 eval 'resize 60' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 7 eval 'resize 70' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 7 eval 'resize 80' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 9 eval 'resize 90' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize 0 eval 'resize 100' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize = eval 'resize =' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize m eval 'resize min' 'echo "Resize region:"' 'command -c cresize'
+bind -c cresize x eval 'resize max' 'echo "Resize region:"' 'command -c cresize'
+
+# continuous window select
+bind ^N eval 'next' 'echo "Select window:"' 'command -c cselect'
+bind ^P eval 'prev' 'echo "Select window:"' 'command -c cselect'
+bind -c cselect ^N eval 'next' 'echo "Select window:"' 'command -c cselect'
+bind -c cselect ^P eval 'prev' 'echo "Select window:"' 'command -c cselect'
+
+# display all windows in a table for visual window selection. (")
+# override default `w'(windows) mapping.
+bind w windowlist
+windowlist title 'Num Title%=Flags'
+
+# scroll
+termcapinfo xterm* ti@:te@
+

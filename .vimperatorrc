@@ -1,0 +1,147 @@
+" ==================== basic options ==================== "
+set guioptions=mBTbnr
+set titlestring=Firefox
+set hlsearch
+"set focuscontent
+set complete=
+set showstatuslinks=2
+"set wildoptions=auto
+set visualbell
+hi Bell display: none;
+set verbose=5
+set defsearch=google
+set suggestengines=google
+set activate=quickmark,paste,tabopen
+set newtab=all
+"set nextpattern+=次(の)?ページ,\b次.*,↑\b,
+"set previouspattern+=前(の)?ページ,\b前.*,\b↓
+
+" ==================== Firefox options ==================== "
+" disable accesskey
+set! ui.key.generalAccessKey=0
+" hide close button
+set! browser.tabs.closeButtons=2
+" open bookmarks in background
+"set! browser.tabs.loadBookmarksInBackground=true
+" open tabs by javascript in background
+"set! browser.tabs.loadDivertedInBackground=true
+" allow lots of popups for ldr
+"set! dom.popup_maximum=1000
+
+" ==================== key mappings ==================== "
+noremap j 5j
+noremap k 5k
+noremap h <A-Left>
+noremap l <A-Right>
+noremap p <Nop>
+"noremap P <Nop>
+noremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>
+noremap ZZ <ESC>
+noremap d D
+noremap ; :
+
+inoremap <silent> <C-h> <Left>
+inoremap <silent> <C-l> <Right>
+inoremap <silent> <C-a> <Home>
+inoremap <silent> <C-e> <End>
+inoremap <silent> <C-d> <Del>
+inoremap <silent> <C-o>p <S-Insert>
+
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <silent> <C-o>p <S-Insert>
+" for SKK
+cnoremap <C-j> <Nop>
+
+" ==================== plugin options ==================== "
+" migemo_hint
+"set hintmatching=custom
+
+" feedSomeKey
+autocmd LocationChange .* :fmapc
+autocmd LocationChange fastladder\\.com/reader :fmap j k s a r p o v c <Space> <S-Space> < > T
+autocmd LocationChange reader\\.livedoor\\.com/reader :fmap j k s a r p o v c <Space> <S-Space> < > T
+autocmd LocationChange mail\\.google\\.(co\\.jp|com)/mail :fmap! -depth 4 c / j k n p o u e x s r a # [ ] z ? gi gs gt gd ga gc
+autocmd LocationChange www\\.google\\.(co\\.jp|com)/reader :fmap! -vkey <S-Space> j k n p m s o v A r S N P X O gh ga gs gt gu / ?
+
+" multi_requester.js
+map ,m,s :so<Space>$RUNTIME/plugin/multi_requester.js
+
+javascript <<EOF
+/* DEFAULT SITES */
+liberator.globalVariables.multi_requester_default_sites = "alc,goo,favotter-new,twitter-search-pcod-no-jp,search-twitter,wikipedia-jp"
+
+/* SITE_INFO */
+liberator.globalVariables.multi_requester_siteinfo = [
+    {
+	name:           'favotter-new',
+	description:    'favotter newest',
+	url:            'http://favotter.matope.com/user.php?user=%s',
+	xpath:          '//div[@class="hentry"]',
+    },
+    {
+	name:           'twitter-search-pcod-no-jp',
+	description:    'twitter search(yats)',
+	url:            'http://pcod.no-ip.org/yats/search?query=%s',
+	xpath:          '//li[@class="hentry"]',
+    },
+    {
+	name:           'wikipedia-jp',
+	description:    'wikipedia(japanese)',
+	url:            'http://ja.wikipedia.org/wiki/%s',
+	xpath:          'id("bodyContent")',
+    },
+    {
+	name:           'search-twitter',
+	description:    'twitter search(search.twitter.com)',
+	url:            'http://search.twitter.com/search?q=%s',
+	xpath:          'id("results")/ul/li',
+    },
+  ];
+
+/* KEY MAPPING */
+liberator.globalVariables.multi_requester_mappings = [
+[',mt', 'twitter-search-pcod-no-jp'],
+  [',Mt', 'twitter-search-pcod-no-jp', '!'],
+  [',mT', 'twitter-search-pcod-no-jp',    , '["your_id"]'],
+  [',MT', 'twitter-search-pcod-no-jp', '!', '["your_id"]'],
+  [',mf', 'favotter-new'],
+  [',Mf', 'favotter-new', '!'],
+  [',mF', 'favotter-new',    ,'["your_id"]'],
+  [',MF', 'favotter-new', '!', '["your_id"]'],
+  [',ma', 'alc'],
+  [',Ma', 'alc', '!'],
+  [',mg', 'goo'],
+  [',Mg', 'goo', '!'],
+  [',mw', 'wikipedia-jp'],
+  [',Mw', 'wikipedia-jp', '!']
+];
+EOF
+
+" twitter.js
+"noremap ,t :twitter<Space>
+"noremap ,T :twitter!<Space>
+"noremap ,@ :twitter!@<CR>
+
+" char-hints-modes2.js
+"let g:hintsio="io"
+"let g:hintchars="HJKLASDFGYUIOPQWERTNMZXCVB"
+
+" ==================== path through ==================== "
+autocmd LocationChange .* js modes.passAllKeys = false
+autocmd LocationChange www\\.google\\.(co\\.jp|com)/reader js modes.passAllKeys = true
+autocmd LocationChange mail\\.google\\.(co\\.jp|com)/mail js modes.passAllKeys = true
+
+" ==================== colorscheme ==================== "
+colorscheme BrewBlue
+style -name tab-style-fix chrome://* <<EOM
+.tab-text-shadow,
+  .tabs-newtab-button {
+      display: none !important;
+ }
+EOM
+
+
+" ==================== others ==================== "
+echo ".pentadactylrc sourced"
+

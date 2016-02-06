@@ -1,0 +1,17 @@
+set tabstop=4 shiftwidth=4 softtabstop=0
+set shiftround
+set expandtab
+set formatoptions+=mM
+set autoindent
+set smartindent
+set cinoptions+=:0
+
+set incsearch
+set wrapscan
+set hlsearch
+set noignorecase
+
+nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
+nnoremap == gg=G2<C-o>
+nnoremap ; :
+

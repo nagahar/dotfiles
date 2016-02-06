@@ -1,0 +1,15 @@
+mklink "c:%HOMEPATH%\.inputrc" "c:%HOMEPATH%\Dropbox\Documents\env\.inputrc"
+mklink "c:%HOMEPATH%\.zshrc" "c:%HOMEPATH%\Dropbox\Documents\env\.zshrc"
+mklink "c:%HOMEPATH%\.zshenv" "c:%HOMEPATH%\Dropbox\Documents\env\.zshenv"
+mklink "c:%HOMEPATH%\.zshrc.cygwin" "c:%HOMEPATH%\Dropbox\Documents\env\.zshrc.cygwin.sh"
+mklink "c:%HOMEPATH%\_vimrc" "c:%HOMEPATH%\Dropbox\Documents\env\.vimrc"
+mklink "c:%HOMEPATH%\_gvimrc" "c:%HOMEPATH%\Dropbox\Documents\env\.gvimrc"
+mklink /D "c:%HOMEPATH%\vimfiles" "c:%HOMEPATH%\Dropbox\Documents\env\.vim"
+mklink "c:%HOMEPATH%\_vrapperrc" "c:%HOMEPATH%\Dropbox\Documents\env\.vrapperrc"
+mklink "c:%HOMEPATH%\_viemurc" "c:%HOMEPATH%\Dropbox\Documents\env\_viemurc"
+mklink /D "c:\w32tex\share\texmf-local" "c:%HOMEPATH%\Dropbox\Documents\env\texmf-local"
+mklink "c:%HOMEPATH%\.screenrc" "c:%HOMEPATH%\Dropbox\Documents\env\.screenrc"
+mklink "c:%HOMEPATH%\.ideavimrc" "c:%HOMEPATH%\Dropbox\Documents\env\.xvimrc"
+mklink "c:%HOMEPATH%\.vsvimrc" "c:%HOMEPATH%\Dropbox\Documents\env\.xvimrc"
+
+pause

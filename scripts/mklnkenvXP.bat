@@ -1,0 +1,10 @@
+fsutil hardlink create "c:%HOMEPATH%\.inputrc" "c:%HOMEPATH%\My Documents\Dropbox\Documents\env\.inputrc"
+fsutil hardlink create "c:%HOMEPATH%\.zshrc" "c:%HOMEPATH%\My Documents\Dropbox\Documents\env\.zshrc"
+fsutil hardlink create "c:%HOMEPATH%\.zshenv" "c:%HOMEPATH%\My Documents\Dropbox\Documents\env\.zshenv"
+fsutil hardlink create "c:%HOMEPATH%\.zshrc.cygwin" "c:%HOMEPATH%\My Documents\Dropbox\Documents\env\.zshrc.cygwin"
+fsutil hardlink create "c:%HOMEPATH%\_vimrc" "c:%HOMEPATH%\My Documents\Dropbox\Documents\env\.vimrc"
+fsutil hardlink create "c:%HOMEPATH%\_gvimrc" "c:%HOMEPATH%\My Documents\Dropbox\Documents\env\.gvimrc"
+linkd "c:%HOMEPATH%\vimfiles" "c:%HOMEPATH%\My Documents\Dropbox\Documents\env\.vim"
+fsutil hardlink create "c:%HOMEPATH%\_vrapperrc" "c:%HOMEPATH%\My Documents\Dropbox\Documents\env\.vrapperrc"
+linkd "c:\w32tex\share\texmf-local" "c:%HOMEPATH%\My Documents\Dropbox\Documents\env\texmf-local"
+
