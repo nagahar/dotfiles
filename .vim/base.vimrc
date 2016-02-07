@@ -514,8 +514,8 @@ aug MyFileType
     "au BufNewFile,BufRead *.mxml setf mxml
     " Plantuml syntax
     "au BufNewFile,BufRead *.puml setf plantuml
-    " ChangeLog
-    autocmd BufRead,BufCreate,BufNew LifeLog.txt setf changelog
+    " Overwrite as changeLog
+    autocmd BufRead,BufCreate,BufNew LifeLog.txt setlocal filetype=changelog
     " EJS
     au BufNewFile,BufRead *.ejs setf html
     " Markdown
