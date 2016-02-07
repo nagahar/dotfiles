@@ -1,5 +1,6 @@
 # ignore files
-.vim/bundle/
+.vim/bundle/*
+!.vim/bundle/manual
 .netrwhist
 *.tar
 
