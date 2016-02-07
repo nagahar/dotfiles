@@ -3,7 +3,7 @@ dropbox=~/Dropbox/Documents/env/
 if [ ! -d $dropbox ]; then
     exit;
 else
-    echo "########## Sync Dropbox Hook ################"
+    echo "########## Sync Dropbox #####################"
     tmptar=tmp.$$.tar
     files="$(git log -n 1 --name-only --oneline | awk 'NR >= 2 && !/^.gitignore/')"
     echo "$files" | tar -cz -T - -f $tmptar

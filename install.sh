@@ -1,24 +1,25 @@
 #!/bin/sh
-ln -s ./.inputrc ~/.inputrc
-ln -s ./.zshrc ~/.zshrc
-ln -s ./.zshenv ~/.zshenv
-ln -s ./.vimrc ~/.vimrc
-ln -s ./.gvimrc ~/.gvimrc
-ln -s ./.vim ~/.vim
-ln -s ./.vrapperrc ~/.vrapperrc
-ln -s ./.screenrc ~/.screenrc
-ln -s ./.ccl-init.lisp ~/.ccl-init.lisp
-ln -s ./.gitignore ~/.gitignore
-ln -s ./.tmux.conf ~/.tmux.conf
-ln -s ./.tmuxinator ~/.tmuxinator
-ln -s ./.xvimrc ~/.xvimrc
-ln -s ./.vimpressrc ~/.vimpressrc
+p=`pwd -P`
+ln -s $p/.inputrc ~/.inputrc
+ln -s $p/.zshrc ~/.zshrc
+ln -s $p/.zshenv ~/.zshenv
+ln -s $p/.vimrc ~/.vimrc
+ln -s $p/.gvimrc ~/.gvimrc
+ln -s $p/.vim ~/.vim
+ln -s $p/.vrapperrc ~/.vrapperrc
+ln -s $p/.screenrc ~/.screenrc
+ln -s $p/.ccl-init.lisp ~/.ccl-init.lisp
+ln -s $p/.gitignore ~/.gitignore
+ln -s $p/.tmux.conf ~/.tmux.conf
+ln -s $p/.tmuxinator ~/.tmuxinator
+ln -s $p/.xvimrc ~/.xvimrc
+ln -s $p/.vimpressrc ~/.vimpressrc
 if [ `uname` = "Darwin" ];then
-    ln -s ./.zshrc.mac ~/.zshrc.mac.sh
+    ln -s $p/.zshrc.mac ~/.zshrc.mac.sh
 elif [ `uname` = "Linux" ];then
-    ln -s ./.zshrc.linux ~/.zshrc.linux.sh
+    ln -s $p/.zshrc.linux ~/.zshrc.linux.sh
 else
-    ln -s ./.zshrc.cygwin ~/.zshrc.cygwin.sh
+    ln -s $p/.zshrc.cygwin ~/.zshrc.cygwin.sh
 fi
 chmod +x ./githooks/post-commit
 cp ./githooks/post-commit .git/hooks/

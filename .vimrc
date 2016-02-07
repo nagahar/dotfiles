@@ -1,172 +1,37 @@
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " system configuration
-"----------------------------------------
+""""""""""""""""""""""""""""""
 if has('win32') || has('win64')
     let $CFGHOME=$HOME.'/vimfiles'
 else
     let $CFGHOME=$HOME.'/.vim'
 endif
 
+""""""""""""""""""""""""""""""
+" preload OS config
+""""""""""""""""""""""""""""""
+if has('win32') || has('win64')
+    source $CFGHOME/win_bundle.vimrc
+elseif has('mac')
+    source $CFGHOME/mac_bundle.vimrc
+elseif has('unix')
+    source $CFGHOME/unix_bundle.vimrc
+endif
+
+""""""""""""""""""""""""""""""
+" GUI config
+""""""""""""""""""""""""""""""
 set guioptions+=M
 set guioptions-=m
 set guioptions-=T
-
-" neobundle
-" Note: Skip initialization for vim-tiny or vim-small.
-if !has('win32') && !has('win64')
-    if !1 | finish | endif
-    filetype plugin indent off     " required!
-    if has('vim_starting')
-        if &compatible
-            set nocompatible               " Be iMproved
-        endif
-        set runtimepath+=$CFGHOME/bundle/neobundle.vim
-    endif
-    call neobundle#begin(expand($CFGHOME.'/bundle/'))
-    NeoBundleFetch 'Shougo/neobundle.vim'
-    " original repos on github
-    NeoBundle 'Shougo/neobundle.vim'
-    NeoBundle 'Shougo/vimproc.vim' , {
-                \ 'build' : {
-                \     'windows' : 'tools\\update-dll-mingw',
-                \     'cygwin' : 'make -f make_cygwin.mak',
-                \     'mac' : 'make -f make_mac.mak',
-                \     'linux' : 'make',
-                \     'unix' : 'gmake',
-                \    },
-                \ }
-    NeoBundle 'Shougo/vimshell.vim'
-    NeoBundle 'Shougo/unite.vim'
-    " if_lua is true -> use neocomplete add@2015-02-07
-    if has('lua')
-        NeoBundle 'Shougo/neocomplete.vim'
-    end
-    NeoBundle 'Shougo/neocomplcache.vim'
-
-    NeoBundle 'Shougo/neosnippet.vim'
-    NeoBundle 'Shougo/neosnippet-snippets'
-    NeoBundle 'honza/vim-snippets'
-    "NeoBundle 'https://bitbucket.org/kovisoft/slimv' " Relplace github with bitbucket delete@2015-02-07
-    NeoBundle 'kovisoft/slimv' " Manual update is needed in slime dir.
-    NeoBundle 'kana/vim-operator-user' " for using vim-clang-format add@2014-12-29
-    NeoBundle 'rhysd/vim-clang-format' " add@2014-12-29
-    NeoBundle 'tpope/vim-fugitive'
-    NeoBundle 'ctrlpvim/ctrlp.vim'
-    NeoBundle 'flazz/vim-colorschemes'
-
-    NeoBundle 'kannokanno/previm'
-    NeoBundle 'tyru/open-browser.vim'
-    " markdown add@2015-04-29
-    NeoBundle 'plasticboy/vim-markdown'
-    " wordpress plugin
-    if has('mac')
-        NeoBundle 'sousu/VimRepress'
-    endif
-    NeoBundle 'tpope/vim-obsession'
-
-
-    au BufRead,BufNewFile *.md set filetype=markdown
-    let g:previm_open_cmd = 'open -a Firefox'
-
-    call neobundle#end()
-    " If there are uninstalled bundles found on startup,
-    " this will conveniently prompt you to install them.
-    NeoBundleCheck
-    filetype plugin indent on     " required!
-    filetype indent on
-
-    " Plugin key-mappings.
-    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-    " SuperTab like snippets behavior.
-    "imap <expr><TAB>
-    " \ pumvisible() ? "\<C-n>" :
-    " \ neosnippet#expandable_or_jumpable() ?
-    " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-    "smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    "\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-    " For conceal markers.
-    "if has('conceal')
-    "  set conceallevel=2 concealcursor=niv
-    "endif
-
-    " Enable snipMate compatibility feature.
-    "let g:neosnippet#enable_snipmate_compatibility = 1
-    " Tell Neosnippet about the other snippets
-    "let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-
-    "neocomplcache / neocomplete
-    "if has('lua') && neobundle#is_installed('neocomplete')
-    if has('lua')
-        " neocomplete
-        let g:acp_enableAtStartup = 0
-        " Use neocomplete.
-        let g:neocomplete#enable_at_startup = 1
-        " Use smartcase.
-        let g:neocomplete#enable_smart_case = 1
-        " Set minimum syntax keyword length.
-        let g:neocomplete#sources#syntax#min_keyword_length = 3
-        let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-        " Define dictionary.
-        let g:neocomplete#sources#dictionary#dictionaries = {
-                    \ 'default' : '',
-                    \ 'vimshell' : $HOME.'/.vimshell_hist',
-                    \ }
-
-        " Define keyword.
-        if !exists('g:neocomplete#keyword_patterns')
-            let g:neocomplete#keyword_patterns = {}
-        endif
-        let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-        " Plugin key-mappings.
-        inoremap <expr><C-g>     neocomplete#undo_completion()
-        inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-        " Recommended key-mappings.
-        " <CR>: close popup and save indent.
-        inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-        function! s:my_cr_function()
-            return neocomplete#close_popup() . "\<CR>"
-            " For no inserting <CR> key.
-            "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-        endfunction
-        " <TAB>: completion.
-        inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-        " <C-h>, <BS>: close popup and delete backword char.
-        inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-        inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-        inoremap <expr><C-y>  neocomplete#close_popup()
-        inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-        " Enable heavy omni completion.
-        if !exists('g:neocomplete#sources#omni#input_patterns')
-            let g:neocomplete#sources#omni#input_patterns = {}
-        endif
-    else
-        " neocomplcache
-        let g:neocomplcache_enable_at_startup = 1
-        let g:neocomplcache_enable_ignore_case = 1
-        let g:neocomplcache_enable_smart_case = 1
-        if !exists('g:neocomplcache_keyword_patterns')
-            let g:neocomplcache_keyword_patterns = {}
-        endif
-        let g:neocomplcache_keyword_patterns._ = '\h\w*'
-        let g:neocomplcache_enable_camel_case_completion = 1
-        let g:neocomplcache_enable_underbar_completion = 1
-        "inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>" "delete@2015-02-07
-        "inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-        "inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-    endif
+" valid mouse
+if has('mouse')
+    set mouse=a
+    "  behave mswin
 endif
-
-set complete+=k
-set browsedir=buffer
-
+""""""""""""""""""""""""""""""
+" Encodings
+""""""""""""""""""""""""""""""
 set fileencodings=iso-2022-jp-3,iso-2022-jp,euc-jisx0213,euc-jp,utf-8,ucs-bom,euc-jp,eucjp-ms,cp932
 "delete@2016-02-06
 " auto recognition for character encoding
@@ -213,18 +78,9 @@ if exists('&ambiwidth')
     set ambiwidth=double
 endif
 
-set nobackup
-set noswapfile
-set nowritebackup
-
-" set undo dirs
-set undodir=$CFGHOME/undo
-" unset octal number
-set nrformats-=octal
-" time to type key
-set timeoutlen=3500
-" don't display message in opening
-set hidden
+""""""""""""""""""""""""""""""
+" Misc configs
+""""""""""""""""""""""""""""""
 " the number of history
 set history=1000
 " the number of undo
@@ -235,20 +91,32 @@ set virtualedit=block
 set whichwrap=b,s,h,l,[,],<,>
 " valid backspace
 set backspace=indent,eol,start
-" complete command line
-set wildmenu
-" valid mouse
-if has('mouse')
-    set mouse=a
-    "  behave mswin
-endif
-
+" Not create redundant files
+set nobackup
+set noswapfile
+set nowritebackup
+" set undo dirs
+set undodir=$CFGHOME/undo
+" unset octal number
+set nrformats-=octal
+" time to type key
+set timeoutlen=3500
 " foldmethod
 set foldmethod=syntax
+" hide buffer when abandoning
+set hidden
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
+" Completion
+""""""""""""""""""""""""""""""
+set complete+=k
+set browsedir=buffer
+" complete command line
+set wildmenu
+
+""""""""""""""""""""""""""""""
 " display configuration
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " don't display splash
 set shortmess+=I
 " no bell
@@ -282,7 +150,6 @@ if &t_Co > 2 || has('gui_running')
     "syntax on
     set hlsearch
 endif
-
 set showtabline=1
 
 " cursor
@@ -301,9 +168,9 @@ else
     let &t_EI = "\e]50;CursorShape=0\x7"
 endif
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " coding style
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " textwidth
 set textwidth=80
 " remove space in concatenating in Japanese
@@ -316,9 +183,9 @@ set expandtab
 set autoindent
 set smartindent
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " search
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " no case ignore
 set noignorecase
 
@@ -332,15 +199,15 @@ set grepprg=internal
 " set 'g' option as default in using substitute
 set gdefault
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " keymap
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " change the mapleader from \ to ,
 let mapleader=","
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " normal mode
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " unvalide forced save command
 "nnoremap ZZ <ESC>
 
@@ -459,9 +326,9 @@ nnoremap <leader>date <Esc>a<C-r>=strftime("%Y-%m-%d")<CR>
 " reopen with UTF-8 add@2016-01-02
 nnoremap <silent> <leader>e8 :e ++enc=utf-8<CR>
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " insert mode
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " kill an input method (IME) after finishing insert mode
 inoremap <ESC> <ESC>:set iminsert=0<CR>
 inoremap {} {}<Left>
@@ -475,9 +342,9 @@ inoremap <> <><Left>
 inoremap <C-w><C-w> <ESC><C-w><C-w>
 inoremap <C-w> <Nop>
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " visual mode
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " change Vim command mode shortcut
 vnoremap ; :
 " close foldings by h at start of line
@@ -489,9 +356,9 @@ vnoremap Q gq
 vnoremap ) t)
 vnoremap ( t(
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " command mode
-"----------------------------------------
+""""""""""""""""""""""""""""""
 cnoremap <C-h> <Left>
 cnoremap <C-l> <Right>
 cnoremap <C-a> <Home>
@@ -500,15 +367,15 @@ cnoremap <C-d> <Del>
 " Save file as sudo
 cnoremap w!! w !sudo tee % >/dev/null
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " motion mode
-"----------------------------------------
+""""""""""""""""""""""""""""""
 onoremap ) t)
 onoremap ( t(
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " Command-line window
-"----------------------------------------
+""""""""""""""""""""""""""""""
 nnoremap <sid>(command-line-enter) q:
 xnoremap <sid>(command-line-enter) q:
 nnoremap <sid>(command-line-norange) q:<C-u>
@@ -535,9 +402,9 @@ function! s:init_cmdwin()
     startinsert!
 endfunction
 
-"----------------------------------------
+""""""""""""""""""""""""""""""
 " Vim script
-"----------------------------------------
+""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
 " move cursur to previouse position
@@ -646,33 +513,22 @@ endfunc
 """"""""""""""""""""""""""""""
 " My File Types
 """"""""""""""""""""""""""""""
-" ActionScript
-aug MyActionScript
+aug MyFileType
     au!
+    " ActionScript
     au BufNewFile,BufRead *.as setf actionscript
     au FileType actionscript set dictionary=$CFGHOME/dict/actionscript.dict
-aug END
-" Mxml
-aug MyMxml
-    au!
+    " Mxml
     au BufNewFile,BufRead *.mxml setf mxml
-aug END
-" Plantuml syntax
-aug MyPlantuml
-    au!
+    " Plantuml syntax
     au BufNewFile,BufRead *.puml setf plantuml
-aug END
-" ChangeLog
-augroup MyChangeLog
-    autocmd!
+    " ChangeLog
     autocmd BufRead,BufCreate,BufNew LifeLog.txt setf changelog
-augroup END
-" EJS
-aug MyEjs
-    au!
+    " EJS
     au BufNewFile,BufRead *.ejs setf html
+    " Markdown
+    au BufRead,BufNewFile *.md setf markdown
 aug END
-
 """"""""""""""""""""""""""""""
 " My File Type Config
 """"""""""""""""""""""""""""""
@@ -717,7 +573,9 @@ augroup END
 "" set my name in snipMate
 "let g:snips_author = 'Takanori Nagahara'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tag completion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 aug MyTagComplete
     au!
     au Filetype xml inoremap <buffer> </ </<C-x><C-o>
@@ -765,27 +623,6 @@ aug MyOmniFunc
     au FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
     au FileType c,cpp,objc set tabstop=2 shiftwidth=2 softtabstop=0
 aug END
-
-
-"To enable neocomplete delete@2015-12-21
-" completefunc
-"au FileType python set completefunc=pythoncomplete#Complete
-"au FileType javascript set completefunc=javascriptcomplete#CompleteJS
-"au FileType html set completefunc=htmlcomplete#CompleteTags
-"au FileType css set completefunc=csscomplete#CompleteCSS
-"au FileType xml set completefunc=xmlcomplete#CompleteTags
-"au FileType php set completefunc=phpcomplete#CompletePHP
-"au FileType sql set completefunc=sqlcomplete#CompleteTags
-"au FileType changelog set completefunc=htmlcomplete#CompleteTags
-"if has('win32') || has('win64')
-"    au FileType c set completefunc=syntaxcomplete#Complete
-"else
-"    au FileType c set completefunc=ccomplete#Complete
-"endif
-"au FileType *
-"            \   if &l:completefunc == ''
-"            \ |   setl completefunc=syntaxcomplete#Complete
-"            \ | endif
 
 
 """"""""""""""""""""""""""""""
@@ -852,7 +689,7 @@ aug END
 "call pathogen#runtime_append_all_bundles()
 "call pathogen#helptags()
 "endif
-call pathogen#infect()
+"call pathogen#infect()
 
 """"""""""""""""""""""""""""""
 " clang-format add@2014-12-27
@@ -889,5 +726,4 @@ elseif has('mac')
 elseif has('unix')
     source $CFGHOME/unix.vimrc
 endif
-
 
