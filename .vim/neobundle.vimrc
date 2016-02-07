@@ -30,37 +30,12 @@ if g:is_neobundle_installed
     " Let NeoBundle manage NeoBundle
     " Required:
     NeoBundleFetch 'Shougo/neobundle.vim'
-
-    " Add or remove your Bundles here:
-    NeoBundle 'Shougo/neosnippet.vim'
-    NeoBundle 'Shougo/neosnippet-snippets'
-    NeoBundle 'tpope/vim-fugitive'
-    NeoBundle 'ctrlpvim/ctrlp.vim'
-    NeoBundle 'flazz/vim-colorschemes'
-
-    if has('lua')
-        NeoBundle 'Shougo/neocomplete.vim'
-    end
-    NeoBundle 'Shougo/neocomplcache.vim'
     " Surround plugin
     NeoBundle 'tpope/vim-surround'
-    " Gauche
-    "NeoBundle 'aharisu/vim_goshrepl'
-    "NeoBundle 'aharisu/vim-gdev'
-    " Gitk clone
-    NeoBundle 'gregsexton/gitv.git'
-    " Open browser
-    NeoBundle 'tyru/open-browser.vim'
-    "------------------------------------"
-    " no repository plugin
-    "------------------------------------"
     NeoBundle 'autodate', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
     NeoBundle 'changelog', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
-    NeoBundle 'taglist_46', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
-    NeoBundle 'utl', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
-    NeoBundle 'xxd', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
-
     if g:tinyvim == 0
+        NeoBundle 'tpope/vim-fugitive'
         " You can specify revision/branch/tag.
         NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
         NeoBundle 'Shougo/unite.vim'
@@ -73,6 +48,15 @@ if g:is_neobundle_installed
                     \     'unix' : 'gmake',
                     \    },
                     \ }
+        NeoBundle 'Shougo/neosnippet.vim'
+        NeoBundle 'Shougo/neosnippet-snippets'
+        NeoBundle 'ctrlpvim/ctrlp.vim'
+        NeoBundle 'flazz/vim-colorschemes'
+        if has('lua')
+            NeoBundle 'Shougo/neocomplete.vim'
+        else
+            NeoBundle 'Shougo/neocomplcache.vim'
+        end
 
         NeoBundle 'kana/vim-operator-user' " for using vim-clang-format add@2014-12-29
         NeoBundle 'rhysd/vim-clang-format' " add@2014-12-29
@@ -92,11 +76,21 @@ if g:is_neobundle_installed
         NeoBundle 'vim-latex', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
         " vimdoc_ja
         NeoBundle 'vim-jp/vimdoc-ja'
+        " Open browser
+        NeoBundle 'tyru/open-browser.vim'
+        " Gauche
+        "NeoBundle 'aharisu/vim_goshrepl'
+        "NeoBundle 'aharisu/vim-gdev'
+        " Gitk clone
+        NeoBundle 'gregsexton/gitv.git'
 
         " Actionscript file type
         NeoBundle 'actionscript', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
         " Switch coding style
         NeoBundle 'switch_style', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
+        NeoBundle 'taglist_46', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
+        NeoBundle 'utl', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
+        NeoBundle 'xxd', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
     endif
 
     " Required:
