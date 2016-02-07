@@ -38,20 +38,6 @@ if g:is_neobundle_installed
     NeoBundle 'ctrlpvim/ctrlp.vim'
     NeoBundle 'flazz/vim-colorschemes'
 
-    " You can specify revision/branch/tag.
-    NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-
-    " Add my bundles
-    NeoBundle 'Shougo/unite.vim'
-    NeoBundle 'Shougo/vimproc.vim' , {
-                \ 'build' : {
-                \     'windows' : 'tools\\update-dll-mingw',
-                \     'cygwin' : 'make -f make_cygwin.mak',
-                \     'mac' : 'make -f make_mac.mak',
-                \     'linux' : 'make',
-                \     'unix' : 'gmake',
-                \    },
-                \ }
     if has('lua')
         NeoBundle 'Shougo/neocomplete.vim'
     end
@@ -75,6 +61,19 @@ if g:is_neobundle_installed
     NeoBundle 'xxd', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
 
     if g:tinyvim == 0
+        " You can specify revision/branch/tag.
+        NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+        NeoBundle 'Shougo/unite.vim'
+        NeoBundle 'Shougo/vimproc.vim' , {
+                    \ 'build' : {
+                    \     'windows' : 'tools\\update-dll-mingw',
+                    \     'cygwin' : 'make -f make_cygwin.mak',
+                    \     'mac' : 'make -f make_mac.mak',
+                    \     'linux' : 'make',
+                    \     'unix' : 'gmake',
+                    \    },
+                    \ }
+
         NeoBundle 'kana/vim-operator-user' " for using vim-clang-format add@2014-12-29
         NeoBundle 'rhysd/vim-clang-format' " add@2014-12-29
         " lint
