@@ -1,3 +1,12 @@
+""""""""""""""""""""""""""""""
+" system configuration
+""""""""""""""""""""""""""""""
+if has('win32') || has('win64')
+    let $CFGHOME=$HOME.'/vimfiles'
+else
+    let $CFGHOME=$HOME.'/.vim'
+endif
+
 set nocompatible               " Be iMproved
 
 if !exists('g:tinyvim')

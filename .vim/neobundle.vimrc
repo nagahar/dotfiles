@@ -132,7 +132,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
 "neocomplcache / neocomplete
-if has('lua') && IsNeobundled('neocomplete')
+if has('lua') && IsNeobundled('neocomplete.vim')
     " neocomplete
     let g:acp_enableAtStartup = 0
     " Use neocomplete.
@@ -179,7 +179,7 @@ if has('lua') && IsNeobundled('neocomplete')
     if !exists('g:neocomplete#sources#omni#input_patterns')
         let g:neocomplete#sources#omni#input_patterns = {}
     endif
-elseif IsNeobundled('neocomplcache')
+elseif IsNeobundled('neocomplcache.vim')
     " neocomplcache
     let g:neocomplcache_enable_at_startup = 1
     let g:neocomplcache_enable_ignore_case = 1
