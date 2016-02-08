@@ -27,7 +27,7 @@ if [ $? -eq 0 ]; then
 fi
 echo "######finished setup $HOME######"
 
-echo "start setup vi"
+echo "######start setup vim######"
 if [ -d $HOME/.vim ]; then
     echo "already exists! $HOME/.vim"
     exit;
@@ -37,6 +37,6 @@ ln -s $p/.gvimrc ~/.gvimrc
 ln -s $p/.vim ~/.vim
 git clone git://github.com/Shougo/neobundle.vim ./.vim/bundle/neobundle.vim
 vi +NeoBundleInstall +q
-echo "######finished setup vi plugins######"
+echo "######finished setup vim plugins######"
 
 echo "######finished setup dot files######"
