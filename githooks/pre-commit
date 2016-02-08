@@ -11,3 +11,4 @@ f=`git diff-index --name-status $against -- | grep 'githooks/post-commit' | cut
 -c 3-`;
 cp $f .git/hooks/
 
+

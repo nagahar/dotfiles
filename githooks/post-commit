@@ -12,7 +12,7 @@ else
         do
             echo "copy $a -> $dropbox"
             if [ $a -eq 'githooks/pre-commit' ]; then
-                echo "copy $a -> .git/hooks"
+                echo "copy $a == .git/hooks"
                 cp $a .git/hooks/
             fi
         done
