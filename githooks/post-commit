@@ -7,15 +7,21 @@ else
     files="$(git log -n 1 --name-only --oneline | awk 'NR >= 2 && !/^.gitignore/')"
     echo "$files" | tar -cz -T - -f $tmptar
     if [ $? -eq 0 ]; then
-    echo "########## Sync Dropbox #####################"
+        echo "########## Sync Dropbox #####################"
         for a in ${files[@]}
         do
             echo "copy $a -> $dropbox"
+            if [ $a -eq 'githooks/pre-commit' ]; then
+                echo "copy $a -> .git/hooks"
+                cp $a .git/hooks/
+            fi
         done
         if [ -f $tmptar ]; then
             `mv $tmptar $dropbox; cd $dropbox; tar xfz $tmptar; rm $tmptar`
         fi
-    echo "############################################"
+        echo "############################################"
+    else
+        rm $tmptar
     fi
 fi
 
