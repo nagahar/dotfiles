@@ -6,7 +6,8 @@ chmod +x setup_hooks.sh
 
 p=`pwd -P`
 echo "######start setup $HOME######"
-ln -s $p/dotgitignore ~/.gitignore
+ln -s $p/dotgitignore ~/.gitignore_global
+ln -s $p/dotgitconfig ~/.gitconfig
 ln -s $p/.inputrc ~/.inputrc
 ln -s $p/.tmux.conf ~/.tmux.conf
 ln -s $p/.tmuxinator ~/.tmuxinator
