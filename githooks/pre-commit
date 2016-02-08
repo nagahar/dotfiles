@@ -8,6 +8,6 @@ else
 fi
 
 f=`git diff-index --name-status $against -- | grep 'githooks/post-commit' | cut
--c3-`;
+-c 3-`;
 cp $f .git/hooks/
 
