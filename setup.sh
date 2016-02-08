@@ -1,9 +1,8 @@
 #!/bin/sh
 echo "start setup dot files"
 
-echo "######copy githooks######"
-chmod +x ./githooks/post-commit
-cp ./githooks/post-commit .git/hooks/
+chmod +x setup_hooks.sh
+./setup_hooks.sh
 
 p=`pwd -P`
 echo "######start setup $HOME######"
