@@ -1,32 +1,43 @@
 #!/bin/sh
+echo "start setup dot files"
+
+echo "######copy githooks######"
 chmod +x ./githooks/post-commit
 cp ./githooks/post-commit .git/hooks/
 
 p=`pwd -P`
+echo "######start setup $HOME######"
+ln -s $p/dotgitignore ~/.gitignore
 ln -s $p/.inputrc ~/.inputrc
+ln -s $p/.tmux.conf ~/.tmux.conf
+ln -s $p/.tmuxinator ~/.tmuxinator
+ln -s $p/.ccl-init.lisp ~/.ccl-init.lisp
+echo "######start setup zsh######"
 ln -s $p/.zshrc ~/.zshrc
 ln -s $p/.zshenv ~/.zshenv
+if [ `uname` = "Darwin" ];then
+    ln -s $p/.zshrc.mac.sh ~/.zshrc.mac.sh
+elif [ `uname` = "Linux" ];then
+    ln -s $p/.zshrc.linux.sh ~/.zshrc.linux.sh
+else
+    ln -s $p/.zshrc.cygwin.sh ~/.zshrc.cygwin.sh
+fi
+if [ $? -eq 0 ]; then
+    source ~/.zshrc
+    echo "######loaded zshrc######"
+fi
+echo "######finished setup $HOME######"
+
+echo "start setup vi"
+if [ -d $HOME/.vim ]; then
+    echo "already exists! $HOME/.vim"
+    exit;
+fi
 ln -s $p/.vimrc ~/.vimrc
 ln -s $p/.gvimrc ~/.gvimrc
 ln -s $p/.vim ~/.vim
-ln -s $p/.vrapperrc ~/.vrapperrc
-ln -s $p/.screenrc ~/.screenrc
-ln -s $p/.ccl-init.lisp ~/.ccl-init.lisp
-ln -s $p/.gitignore ~/.gitignore
-ln -s $p/.tmux.conf ~/.tmux.conf
-ln -s $p/.tmuxinator ~/.tmuxinator
-ln -s $p/.xvimrc ~/.xvimrc
-ln -s $p/.vimpressrc ~/.vimpressrc
-ln -s $p/dotgitignore ~/.gitignore
-if [ `uname` = "Darwin" ];then
-    ln -s $p/.zshrc.mac ~/.zshrc.mac.sh
-elif [ `uname` = "Linux" ];then
-    ln -s $p/.zshrc.linux ~/.zshrc.linux.sh
-else
-    ln -s $p/.zshrc.cygwin ~/.zshrc.cygwin.sh
-fi
-echo "finished setup dot files"
-
 git clone git://github.com/Shougo/neobundle.vim ./.vim/bundle/neobundle.vim
-vim +NeoBundleInstall +q
-echo "finished setup vim plugins"
+vi +NeoBundleInstall +q
+echo "######finished setup vi plugins######"
+
+echo "######finished setup dot files######"
