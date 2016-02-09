@@ -518,11 +518,6 @@ endfunc
 """"""""""""""""""""""""""""""
 aug MyFileType
     au!
-    " ActionScript
-    au BufNewFile,BufRead *.as setf actionscript
-    au FileType actionscript set dictionary=$CFGHOME/dict/actionscript.dict
-    " Mxml
-    "au BufNewFile,BufRead *.mxml setf mxml
     " Plantuml syntax
     "au BufNewFile,BufRead *.puml setf plantuml
     " Overwrite as changeLog
