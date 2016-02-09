@@ -84,8 +84,6 @@ if g:is_neobundle_installed
         " Gitk clone
         NeoBundle 'gregsexton/gitv.git'
 
-        " Actionscript file type
-        NeoBundle 'actionscript', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
         " Switch coding style
         NeoBundle 'switch_style', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
         NeoBundle 'taglist_46', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}

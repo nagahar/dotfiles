@@ -1,4 +1,8 @@
 # ignore files
+.vim/after
+.vim/autoload
+.vim/ftdetect
+.vim/ftplugin
 .vim/bundle/*
 !.vim/bundle/manual
 .netrwhist
