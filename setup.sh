@@ -22,10 +22,7 @@ elif [ `uname` = "Linux" ];then
 else
     ln -s $p/.zshrc.cygwin.sh ~/.zshrc.cygwin.sh
 fi
-if [ $? -eq 0 ]; then
-    source ~/.zshrc
-    echo "######loaded zshrc######"
-fi
+echo "######finished setup zsh######"
 echo "######finished setup $HOME######"
 
 echo "######start setup vim######"
