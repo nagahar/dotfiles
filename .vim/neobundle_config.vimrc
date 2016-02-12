@@ -84,8 +84,9 @@ if IsNeobundled('syntastic')
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
     let g:syntastic_mode_map = {
-                \ "mode" : "active",
-                \ "active_filetypes" : ["javascript", "json"],
+                \ "mode" : "passive",
+                \ "active_filetypes" : [],
+                \ "passive_filetypes" : ["javascript", "json", "ruby"]
                 \}
 endif
 
