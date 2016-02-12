@@ -1,5 +1,6 @@
 echo "######start setup $HOME######"
 mklink "c:%HOMEPATH%\.inputrc" "c:%HOMEPATH%\Dropbox\Documents\env\.inputrc"
+mklink "c:%HOMEPATH%\.jshintrc" "c:%HOMEPATH%\Dropbox\Documents\env\.jshintrc"
 echo "######start setup zsh######"
 mklink "c:%HOMEPATH%\.zshrc" "c:%HOMEPATH%\Dropbox\Documents\env\.zshrc"
 mklink "c:%HOMEPATH%\.zshenv" "c:%HOMEPATH%\Dropbox\Documents\env\.zshenv"
