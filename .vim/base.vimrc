@@ -360,6 +360,7 @@ vnoremap <expr> l foldclosed(line('.')) != -1 ? 'zogv0' : 'l'
 vnoremap Q gq
 vnoremap ) t)
 vnoremap ( t(
+vnoremap <silent> <leader>p :VimShellSendString<CR>
 
 """"""""""""""""""""""""""""""
 " command mode
