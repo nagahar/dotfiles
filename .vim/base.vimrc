@@ -322,6 +322,8 @@ nnoremap <leader>emin :exec MyEMinutesTemplate()<CR>
 
 " vimshel
 nnoremap <silent> <leader>vs :VimShell<CR>
+nnoremap <silent> <leader>p :VimShellSendString<CR>
+
 
 " date add@2014-12-29
 nnoremap <leader>date <Esc>a<C-r>=strftime("%Y-%m-%d")<CR>
