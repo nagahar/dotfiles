@@ -83,6 +83,8 @@ if g:is_neobundle_installed
         "NeoBundle 'aharisu/vim-gdev'
         " Gitk clone
         NeoBundle 'gregsexton/gitv.git'
+        " Quick Run
+        NeoBundle 'thinca/vim-quickrun'
 
         " Switch coding style
         NeoBundle 'switch_style', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}

@@ -316,7 +316,7 @@ nnoremap <leader>to :r $CFGHOME/template/todo.vim<CR>
 nnoremap <leader>eto :r $CFGHOME/template/etodo.vim<CR>
 nnoremap <leader>sp :r $CFGHOME/template/spec.vim<CR>
 nnoremap <leader>d :exec MyDailyTemplate()<CR>
-nnoremap <leader>r :exec MyWeeklyTemplate()<CR>
+nnoremap <leader>wr :exec MyWeeklyTemplate()<CR>
 nnoremap <leader>min :exec MyMinutesTemplate()<CR>
 nnoremap <leader>emin :exec MyEMinutesTemplate()<CR>
 
