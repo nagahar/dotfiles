@@ -33,7 +33,7 @@ windows:
           - cd agepan/agepan
             #- heroku local
   - model-generator:
-      layout: 8e81,272x61,0,0{100x61,0,0,6,171x61,101,0[171x31,101,0,8,171x29,101,32,9]}
+      layout: dbef,272x61,0,0{100x61,0,0,0,171x61,101,0[171x31,101,0,3,171x29,101,32{85x29,101,32,4,85x29,187,32,9}]}
       panes:
         - Edit:
           - cd agepan/model-generator/node
@@ -46,7 +46,7 @@ windows:
         - Exec:
           - cd agepan/model-generator/node
   - http_util:
-      layout: 8e81,272x61,0,0{100x61,0,0,6,171x61,101,0[171x31,101,0,8,171x29,101,32,9]}
+      layout: dbef,272x61,0,0{100x61,0,0,0,171x61,101,0[171x31,101,0,3,171x29,101,32{85x29,101,32,4,85x29,187,32,9}]}
       panes:
         - Lib:
           - cd http_util/lib
@@ -58,3 +58,4 @@ windows:
           - cd ~/dotfiles/
         - Test:
           - cd http_util
+
