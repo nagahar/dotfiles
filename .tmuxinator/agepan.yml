@@ -1,0 +1,60 @@
+# ~/.tmuxinator/agepan.yml
+
+name: agepan
+root: /vagrant/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - agepan:
+      layout: dbef,272x61,0,0{100x61,0,0,0,171x61,101,0[171x31,101,0,3,171x29,101,32{85x29,101,32,4,85x29,187,32,9}]}
+      panes:
+        - JS:
+          - cd agepan/agepan/public/js
+          - vi main.js
+        - Haml:
+          - cd agepan/agepan/views/
+        - Config:
+          - cd ~/dotfiles/
+        - Webrick:
+          - cd agepan/agepan
+            #- heroku local
+  - model-generator:
+      layout: 8e81,272x61,0,0{100x61,0,0,6,171x61,101,0[171x31,101,0,8,171x29,101,32,9]}
+      panes:
+        - Edit:
+          - cd agepan/model-generator/node
+          - vi make_school_list.js
+        - INT:
+          - cd agepan/model-generator/node
+          - node
+        - Config:
+          - cd ~/dotfiles/
+        - Exec:
+          - cd agepan/model-generator/node
+  - http_util:
+      layout: 8e81,272x61,0,0{100x61,0,0,6,171x61,101,0[171x31,101,0,8,171x29,101,32,9]}
+      panes:
+        - Lib:
+          - cd http_util/lib
+          - vi http_util.js
+        - INT:
+          - cd http_util
+            #- node
+        - Config:
+          - cd ~/dotfiles/
+        - Test:
+          - cd http_util
