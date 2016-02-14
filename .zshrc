@@ -150,7 +150,7 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 # emacs like keybind (e.x. Ctrl-a goes to head of a line and Ctrl-e goes
 # to end of it)
 #
-bindkey -v
+bindkey -e
 
 # historical backward/forward search with linehead string binded to ^P/^N
 #
@@ -185,25 +185,25 @@ bindkey '^u' backward-kill-line
 setopt noflowcontrol
 bindkey '^q' push-line-or-edit
 
-# move to beggining of the line
+## move to beggining of the line
+##
+#bindkey "^a" vi-beginning-of-line
 #
-bindkey "^a" vi-beginning-of-line
-
-# move to end of the line
+## move to end of the line
+##
+#bindkey "^e" vi-end-of-line
 #
-bindkey "^e" vi-end-of-line
-
-# move to backward char
+## move to backward char
+##
+#bindkey "^h" vi-backward-char
 #
-bindkey "^h" vi-backward-char
-
-# move to forward char
+## move to forward char
+##
+#bindkey "^l" vi-forward-char
 #
-bindkey "^l" vi-forward-char
-
-# delete the char under the cursor
-#
-bindkey "^d" vi-delete-char
+## delete the char under the cursor
+##
+#bindkey "^d" vi-delete-char
 
 
 ## Command history configuration
