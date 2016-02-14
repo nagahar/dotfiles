@@ -88,6 +88,8 @@ if IsNeobundled('syntastic')
                 \ "active_filetypes" : [],
                 \ "passive_filetypes" : ["javascript", "json", "ruby"]
                 \}
+    let g:syntastic_javascript_checkers = ["jshint"]
+    nnoremap <silent> <leader>ck :SyntasticCheck<CR>
 endif
 
 "To enable neocomplete delete@2015-12-21

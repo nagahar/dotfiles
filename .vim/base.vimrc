@@ -324,7 +324,6 @@ nnoremap <leader>emin :exec MyEMinutesTemplate()<CR>
 nnoremap <silent> <leader>vs :VimShell<CR>
 nnoremap <silent> <leader>p :VimShellSendString<CR>
 
-
 " date add@2014-12-29
 nnoremap <leader>date <Esc>a<C-r>=strftime("%Y-%m-%d")<CR>
 
@@ -360,7 +359,7 @@ vnoremap <expr> l foldclosed(line('.')) != -1 ? 'zogv0' : 'l'
 vnoremap Q gq
 vnoremap ) t)
 vnoremap ( t(
-vmap <silent> <leader>p :VimShellSendString<CR>
+vnoremap <silent> <leader>p :VimShellSendString<CR>
 
 """"""""""""""""""""""""""""""
 " command mode
