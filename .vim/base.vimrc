@@ -36,11 +36,6 @@ endif
 """"""""""""""""""""""""""""""
 set fileencodings=iso-2022-jp-3,iso-2022-jp,euc-jisx0213,euc-jp,utf-8,ucs-bom,euc-jp,eucjp-ms,cp932
 "delete@2016-02-06
-" auto recognition for character encoding
-"if &encoding !=# 'utf-8'
-"    set encoding=japan
-"    set fileencoding=japan
-"endif
 "if has('iconv')
 "    let s:enc_euc = 'euc-jp'
 "    let s:enc_jis = 'iso-2022-jp'

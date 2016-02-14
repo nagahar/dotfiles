@@ -17,10 +17,17 @@ let plugin_hz_ja_disable     = 1
 "$VIM/plugins/kaoriya/scrnmode.vim
 let plugin_scrnmode_disable  = 1
 "$VIM/plugins/kaoriya/verifyenc.vim
+"$VIM/plugins/kaoriya/encode_japan.vim
 let plugin_verifyenc_disable = 1
 
-set encoding=cp932
+"auto recognition for character encoding
+if &encoding !=# 'utf-8'
+    set encoding=japan
+    set fileencoding=japan
+endif
+"set encoding=cp932
 set clipboard+=unnamed
+
 "set diffexpr=MyDiff()
 "function! MyDiff()
 "    let opt = '-a --binary '
