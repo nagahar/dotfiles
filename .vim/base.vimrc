@@ -449,21 +449,21 @@ endfunc
 " My reporting function
 """"""""""""""""""""""""""""""
 func! MyDailyTemplate()
-    let b:autodate_keyword_pre = ':'
+    let b:autodate_keyword_pre = ': '
     let b:autodate_keyword_post = '\.'
     let b:autodate_format= '%Y-%m-%d (%a)'
     r $CFGHOME/template/daily.vim
 endfunc
 
 func! MyWeeklyTemplate()
-    let b:autodate_keyword_pre = ':'
+    let b:autodate_keyword_pre = ': '
     let b:autodate_keyword_post = '\.'
     let b:autodate_format= '%Y-%m-%d (%a)'
     r $CFGHOME/template/weekly.vim
 endfunc
 
 func! MyMinutesTemplate()
-    let b:autodate_keyword_pre = ':'
+    let b:autodate_keyword_pre = ': '
     let b:autodate_keyword_post = ' @'
     let b:autodate_format= '%Y-%m-%d (%a) '
     r $CFGHOME/template/minutes.vim
