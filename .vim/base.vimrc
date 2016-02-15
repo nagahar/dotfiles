@@ -35,40 +35,6 @@ endif
 " Encodings
 """"""""""""""""""""""""""""""
 set fileencodings=iso-2022-jp-3,iso-2022-jp,euc-jisx0213,euc-jp,utf-8,ucs-bom,euc-jp,eucjp-ms,cp932
-"delete@2016-02-06
-"if has('iconv')
-"    let s:enc_euc = 'euc-jp'
-"    let s:enc_jis = 'iso-2022-jp'
-"    if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-"        let s:enc_euc = 'eucjp-ms'
-"        let s:enc_jis = 'iso-2022-jp-3'
-"    elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==#
-"\xad\xc5\xad\xcb"
-"        let s:enc_euc = 'euc-jisx0213'
-"        let s:enc_jis = 'iso-2022-jp-3'
-"    endif
-"    if &encoding ==# 'utf-8'
-"        let s:fileencodings_default = &fileencodings
-"        let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-"        let &fileencodings = &fileencodings .','. s:fileencodings_default
-"        unlet s:fileencodings_default
-"    else
-"        let &fileencodings = &fileencodings .','. s:enc_jis
-"        set fileencodings+=utf-8,ucs-2le,ucs-2
-"        if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-"            set fileencodings+=cp932
-"            set fileencodings-=euc-jp
-"            set fileencodings-=euc-jisx0213
-"            set fileencodings-=eucjp-ms
-"            let &encoding = s:enc_euc
-"            let &fileencoding = s:enc_euc
-"        else
-"            let &fileencodings = &fileencodings .','. s:enc_euc
-"        endif
-"    endif
-"    unlet s:enc_euc
-"    unlet s:enc_jis
-"endif
 
 set fileformats=unix,dos,mac
 if exists('&ambiwidth')
@@ -483,21 +449,21 @@ endfunc
 " My reporting function
 """"""""""""""""""""""""""""""
 func! MyDailyTemplate()
-    let b:autodate_keyword_pre = '日報:'
+    let b:autodate_keyword_pre = ':'
     let b:autodate_keyword_post = '\.'
     let b:autodate_format= '%Y-%m-%d (%a)'
     r $CFGHOME/template/daily.vim
 endfunc
 
 func! MyWeeklyTemplate()
-    let b:autodate_keyword_pre = '週報:'
+    let b:autodate_keyword_pre = ':'
     let b:autodate_keyword_post = '\.'
     let b:autodate_format= '%Y-%m-%d (%a)'
     r $CFGHOME/template/weekly.vim
 endfunc
 
 func! MyMinutesTemplate()
-    let b:autodate_keyword_pre = '日時場所:'
+    let b:autodate_keyword_pre = ':'
     let b:autodate_keyword_post = ' @'
     let b:autodate_format= '%Y-%m-%d (%a) '
     r $CFGHOME/template/minutes.vim
