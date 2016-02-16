@@ -17,8 +17,9 @@ let plugin_hz_ja_disable     = 1
 "$VIM/plugins/kaoriya/scrnmode.vim
 let plugin_scrnmode_disable  = 1
 "$VIM/plugins/kaoriya/verifyenc.vim
-"let plugin_verifyenc_disable = 1
+let plugin_verifyenc_disable = 1
 
+au BufReadPost * if search('\S', 'w') == 0 | set fenc=cp932 | endif
 "auto recognition for character encoding
 "if &encoding !=# 'utf-8'
 "    set encoding=japan
