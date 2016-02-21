@@ -1,5 +1,6 @@
 #### my local change
 .old
+.bak
 
 #### vim
 [._]*.s[a-w][a-z]
@@ -127,3 +128,22 @@ xcuserdata
 *.moved-aside
 DerivedData
 *.xcuserstate
+
+### C#
+bin/
+obj/
+*.o
+*.lo
+*.la
+*.al
+.libs
+*.so
+*.so.[0-9]*
+*.a
+*.pyc
+*.pyo
+*.rej
+*~
+*.swp
+*.dll
+*.pdb
