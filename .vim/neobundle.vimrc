@@ -1,4 +1,15 @@
 """"""""""""""""""""""""""""""
+" system configuration
+""""""""""""""""""""""""""""""
+if !exists('$CFGHOME')
+    if has('win32') || has('win64')
+        let $CFGHOME=$HOME.'/vimfiles'
+    else
+        let $CFGHOME=$HOME.'/.vim'
+    endif
+endif
+
+""""""""""""""""""""""""""""""
 " NeoBundle
 """"""""""""""""""""""""""""""
 "NeoBundle Scripts-----------------------------

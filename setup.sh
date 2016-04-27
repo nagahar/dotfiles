@@ -35,7 +35,7 @@ ln -s $p/.vimrc ~/.vimrc
 ln -s $p/.gvimrc ~/.gvimrc
 ln -s $p/.vim ~/.vim
 git clone git://github.com/Shougo/neobundle.vim ./.vim/bundle/neobundle.vim
-vi +NeoBundleInstall +q
+vi -u $p/.vimrc +NeoBundleInstall +q
 echo "######finished setup vim plugins######"
 
 echo "######finished setup dot files######"
