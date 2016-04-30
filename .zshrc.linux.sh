@@ -8,5 +8,5 @@ export PATH
 #export PATH="$JAVA_HOME/jre/bin:$JAVA_HOME/bin:$PATH"
 
 export EDITOR=/usr/bin/vim
-alias vi=/usr/bin/vim
+alias vi="/usr/bin/vim -u $HOME/.vim/base.vimrc"
 

@@ -1,3 +1,6 @@
+[user]
+	email = takanori.nagahara@gmail.com
+	name = Takanori Nagahara
 [core]
 	excludesfile = ~/.gitignore_global
 
