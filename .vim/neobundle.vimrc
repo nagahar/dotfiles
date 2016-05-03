@@ -43,8 +43,8 @@ if g:is_neobundle_installed
     NeoBundleFetch 'Shougo/neobundle.vim'
     " Surround plugin
     NeoBundle 'tpope/vim-surround'
-    NeoBundle 'autodate', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
-    NeoBundle 'changelog', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
+    NeoBundle 'autodate', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
+    NeoBundle 'changelog', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
     if g:tinyvim == 0
         NeoBundle 'tpope/vim-fugitive'
         " You can specify revision/branch/tag.
@@ -84,7 +84,7 @@ if g:is_neobundle_installed
         NeoBundle 'kannokanno/previm'
         " Tex
         NeoBundle 'vim-scripts/TeX-9'
-        NeoBundle 'vim-latex', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
+        NeoBundle 'vim-latex', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
         " vimdoc_ja
         NeoBundle 'vim-jp/vimdoc-ja'
         " Open browser
@@ -98,10 +98,10 @@ if g:is_neobundle_installed
         NeoBundle 'thinca/vim-quickrun'
 
         " Switch coding style
-        NeoBundle 'switch_style', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
-        NeoBundle 'taglist_46', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
-        NeoBundle 'utl', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
-        NeoBundle 'xxd', {'type': 'none', 'base': $CFGHOME.'/bundle/manual'}
+        NeoBundle 'switch_style', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
+        NeoBundle 'taglist_46', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
+        NeoBundle 'utl', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
+        NeoBundle 'xxd', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
     endif
 
     " Required:
