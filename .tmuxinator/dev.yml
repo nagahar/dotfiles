@@ -20,7 +20,7 @@ root: ~/
 
 windows:
   - dev:
-      layout: main-vertical
+      layout: 1630,272x61,0,0{129x61,0,0,0,142x61,130,0[142x29,130,0,1,142x31,130,30,2]}
       panes:
         - #empty
         - #empty
