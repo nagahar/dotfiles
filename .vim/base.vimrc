@@ -333,14 +333,17 @@ nnoremap <leader>min :exec MyMinutesTemplate()<CR>
 nnoremap <leader>emin :exec MyEMinutesTemplate()<CR>
 
 " vimshel
-nnoremap <silent> <leader>vs :VimShell<CR>
-nnoremap <silent> <leader>p :VimShellSendString<CR>
+"nnoremap <silent> <leader>vs :VimShell<CR>
+"nnoremap <silent> <leader>p :VimShellSendString<CR>
 
 " date add@2014-12-29
 nnoremap <leader>date <Esc>a<C-r>=strftime("%Y-%m-%d")<CR>
 
 " reopen with UTF-8 add@2016-01-02
 nnoremap <silent> <leader>e8 :e ++enc=utf-8<CR>
+
+" set current path to clipboard
+nnoremap <Leader>path <Esc>:let @+ = eval("expand('%:p')")<CR>
 
 """"""""""""""""""""""""""""""
 " insert mode
