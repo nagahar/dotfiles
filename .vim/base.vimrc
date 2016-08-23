@@ -191,8 +191,8 @@ set textwidth=80
 " remove space in concatenating in Japanese
 set formatoptions+=mM
 
-" Use space 4 change@2014-12-27
-set tabstop=4 shiftwidth=4 softtabstop=0
+" Use space 2 change@2016-08-23
+set tabstop=2 shiftwidth=2 softtabstop=0
 set shiftround
 set expandtab
 set autoindent
