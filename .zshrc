@@ -6,9 +6,12 @@
 #
 autoload colors
 colors
+
+source ~/.git-prompt.sh
 case ${UID} in
 0)
-  PROMPT="%B%{${fg[red]}%}%m:%1/ %n#%{${reset_color}%}%b "
+  PROMPT="%B%{${fg[red]}%}%m:%1/ %n$(__git_ps1)
+#%{${reset_color}%}%b "
   RPROMPT="[%~]"
   PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
   SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
@@ -16,7 +19,8 @@ case ${UID} in
     PROMPT="%{${fg[white]}%}${HOST%%.*} ${PROMPT}"
   ;;
 *)
-  PROMPT="%{${fg[green]}%}%m:%1/ %n%%%{${reset_color}%} "
+  PROMPT="%{${fg[green]}%}%m:%1/ %n$(__git_ps1)
+%%%{${reset_color}%} "
   RPROMPT="[%~]"
   PROMPT2="%{${fg[green]}%}%_%%%{${reset_color}%} "
   SPROMPT="%{${fg[green]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
