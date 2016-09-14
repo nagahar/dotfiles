@@ -1,5 +1,7 @@
 set clipboard+=unnamed
-colorscheme mrkn256
+
+colorscheme desert
+
 
 " Tex
 "let g:Tex_CompileRule_dvi = '/usr/local/teTeX/bin/platex --kanji=utf8 -interaction=nonstopmode -shell-escape $*'

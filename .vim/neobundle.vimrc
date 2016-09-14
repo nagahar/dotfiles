@@ -32,7 +32,7 @@ endfunction
 try
     call neobundle#begin(expand($CFGHOME.'/bundle/'))
     "let g:neobundle#log_filename = $CFGHOME."/neobundle.log"
-catch /^Vim\%((\a\+)\)\=:E117/› " catch error E117: Unkown function
+catch /^Vim\%((\a\+)\)\=:E117/ " catch error E117: Unkown function
     let g:is_neobundle_installed = 0
     set title titlestring=NeoBundle\ is\ not\ installed!
 endtry
@@ -50,15 +50,15 @@ if g:is_neobundle_installed
         " You can specify revision/branch/tag.
         NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
         NeoBundle 'Shougo/unite.vim'
-        NeoBundle 'Shougo/vimproc.vim' , {
-                    \ 'build' : {
-                    \     'windows' : 'tools\\update-dll-mingw',
-                    \     'cygwin' : 'make -f make_cygwin.mak',
-                    \     'mac' : 'make -f make_mac.mak',
-                    \     'linux' : 'make',
-                    \     'unix' : 'gmake',
-                    \    },
-                    \ }
+        "NeoBundle 'Shougo/vimproc.vim' , {
+        "            \ 'build' : {
+        "            \     'windows' : 'tools\\update-dll-mingw',
+        "            \     'cygwin' : 'make -f make_cygwin.mak',
+        "            \     'mac' : 'make -f make_mac.mak',
+        "            \     'linux' : 'make',
+        "            \     'unix' : 'gmake',
+        "            \    },
+        "            \ }
         NeoBundle 'Shougo/neosnippet.vim'
         NeoBundle 'Shougo/neosnippet-snippets'
         NeoBundle 'ctrlpvim/ctrlp.vim'
@@ -102,6 +102,9 @@ if g:is_neobundle_installed
         NeoBundle 'taglist_46', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
         NeoBundle 'utl', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
         NeoBundle 'xxd', {'type': 'none', 'base': $CFGHOME.'/bundle/nosync'}
+
+        " fastfold
+        NeoBundle 'Konfekt/FastFold.git'
     endif
 
     " Required:

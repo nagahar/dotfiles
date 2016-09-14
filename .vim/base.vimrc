@@ -169,7 +169,7 @@ set showtabline=1
 
 " cursor
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 
 "cursor shape
 if exists('$TMUX')
@@ -187,7 +187,7 @@ endif
 " coding style
 """"""""""""""""""""""""""""""
 " textwidth
-set textwidth=80
+set textwidth=0
 " remove space in concatenating in Japanese
 set formatoptions+=mM
 
@@ -259,7 +259,7 @@ nnoremap <F3> :source %<CR>
 " Open and close all the three plugins on the same time
 "nnoremap <F12> :TrinityToggleAll<CR>
 " build tags of your own project with Ctrl-F12
-nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+"nnoremap <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 
 " open new file
 "nnoremap <Leader>o :CtrlP<CR>
@@ -600,14 +600,14 @@ aug MyTagComplete
 aug END
 
 " configure tags - add additional tags here or comment out not-used ones
-set tags+=~$CFGHOME/tags/cpp
+"set tags+=~$CFGHOME/tags/cpp
 "set tags+=~/.vim/tags/gl
 "set tags+=~/.vim/tags/sdl
 "set tags+=~/.vim/tags/qt4
 
-if has('path_extra')
-    set tags+=tags;
-end
+"if has('path_extra')
+"    set tags+=tags;
+"end
 
 """"""""""""""""""""""""""""""
 " omnifunc

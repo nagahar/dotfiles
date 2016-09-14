@@ -13,6 +13,7 @@ ln -s $p/.inputrc ~/.inputrc
 ln -s $p/.tmux.conf ~/.tmux.conf
 ln -s $p/.tmuxinator ~/.tmuxinator
 ln -s $p/.ccl-init.lisp ~/.ccl-init.lisp
+ln -s $p/.git-prompt.sh ~/.git-prompt.sh
 echo "######start setup zsh######"
 ln -s $p/.zshrc ~/.zshrc
 ln -s $p/.zshenv ~/.zshenv

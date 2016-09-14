@@ -27,7 +27,7 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 """"""""""""""""""""""""""""""
 "let html_number_lines = 0
 "let html_no_pre = 1
-"let html_use_encoding = "utf(I0(B8"
+"let html_use_encoding = "utfｰ8"
 
 """"""""""""""""""""""""""""""
 " vim-latex
