@@ -5,8 +5,9 @@
 .vim/plugin
 .vim/ftdetect
 .vim/ftplugin
+.vim/doc
 .vim/bundle/*
-!.vim/bundle/manual
+!.vim/bundle/nosync
 .netrwhist
 *.tar
 
