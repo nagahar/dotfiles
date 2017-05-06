@@ -2,11 +2,7 @@
 " system configuration
 """"""""""""""""""""""""""""""
 if !exists('$CFGHOME')
-    if has('win32') || has('win64')
-        let $CFGHOME=$HOME.'/vimfiles'
-    else
-        let $CFGHOME=$HOME.'/.vim'
-    endif
+    let $CFGHOME=$HOME.'/.vim'
 endif
 
 set nocompatible               " Be iMproved
@@ -624,7 +620,7 @@ aug MyOmniFunc
     au FileType php set omnifunc=phpcomplete#CompletePHP
     au FileType sql set omnifunc=sqlcomplete#CompleteTags
     au FileType changelog set omnifunc=htmlcomplete#CompleteTags
-    if has('win32') || has('win64')
+    if has('win32') || has('win64') || has('windows')
         au FileType c set omnifunc=syntaxcomplete#Complete
     else
         au FileType c set omnifunc=ccomplete#Complete
@@ -668,7 +664,7 @@ source $CFGHOME/neobundle_config.vimrc
 """"""""""""""""""""""""""""""
 " load OS config
 """"""""""""""""""""""""""""""
-if has('win32') || has('win64')
+if has('win32') || has('win64') || has('windows')
     source $CFGHOME/win.vimrc
 elseif has('mac')
     source $CFGHOME/mac.vimrc
