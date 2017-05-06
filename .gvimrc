@@ -101,6 +101,6 @@ endif
 "    call singleton#enable()
 "endif
 
-if has('kaoriya')
-  set noimdisableactivate
-endif
+"if has('kaoriya')
+"  set noimdisableactivate
+"endif

@@ -306,7 +306,7 @@ nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 
 " utl.vim
 nnoremap <silent> <leader>u :Utl<CR>
-nnoremap <silent> <leader>s :Utl ol www.google.com/search?q=<C-r>/<CR>
+"nnoremap <silent> <leader>s :Utl ol www.google.com/search?q=<C-r>/<CR>
 
 nnoremap == gg=G2<C-o>
 "" Tabs
@@ -318,22 +318,22 @@ nnoremap <silent> <leader>tn :<C-u>tabnext<CR>
 nnoremap <silent> <leader>tp :<C-u>tabprevious<CR>
 
 " template
-nnoremap <leader>b :r $CFGHOME/template/bug.vim<CR>
-nnoremap <leader>br :r $CFGHOME/template/bugr.vim<CR>
-nnoremap <leader>eb :r $CFGHOME/template/ebug.vim<CR>
-nnoremap <leader>co :r $CFGHOME/template/confirm.vim<CR>
-nnoremap <leader>eco :r $CFGHOME/template/econfirm.vim<CR>
-nnoremap <leader>f :r $CFGHOME/template/fix.vim<CR>
-nnoremap <leader>fr :r $CFGHOME/template/fixr.vim<CR>
-nnoremap <leader>ef :r $CFGHOME/template/efix.vim<CR>
-nnoremap <leader>to :r $CFGHOME/template/todo.vim<CR>
-nnoremap <leader>eto :r $CFGHOME/template/etodo.vim<CR>
-nnoremap <leader>sp :r $CFGHOME/template/spec.vim<CR>
-nnoremap <leader>mo :r $CFGHOME/template/mypro.vim<CR>
-nnoremap <leader>d :exec MyDailyTemplate()<CR>
-nnoremap <leader>wr :exec MyWeeklyTemplate()<CR>
-nnoremap <leader>min :exec MyMinutesTemplate()<CR>
-nnoremap <leader>emin :exec MyEMinutesTemplate()<CR>
+"nnoremap <leader>b :r $CFGHOME/template/bug.vim<CR>
+"nnoremap <leader>br :r $CFGHOME/template/bugr.vim<CR>
+"nnoremap <leader>eb :r $CFGHOME/template/ebug.vim<CR>
+"nnoremap <leader>co :r $CFGHOME/template/confirm.vim<CR>
+"nnoremap <leader>eco :r $CFGHOME/template/econfirm.vim<CR>
+"nnoremap <leader>f :r $CFGHOME/template/fix.vim<CR>
+"nnoremap <leader>fr :r $CFGHOME/template/fixr.vim<CR>
+"nnoremap <leader>ef :r $CFGHOME/template/efix.vim<CR>
+"nnoremap <leader>to :r $CFGHOME/template/todo.vim<CR>
+"nnoremap <leader>eto :r $CFGHOME/template/etodo.vim<CR>
+"nnoremap <leader>sp :r $CFGHOME/template/spec.vim<CR>
+"nnoremap <leader>mo :r $CFGHOME/template/mypro.vim<CR>
+"nnoremap <leader>d :exec MyDailyTemplate()<CR>
+"nnoremap <leader>wr :exec MyWeeklyTemplate()<CR>
+"nnoremap <leader>min :exec MyMinutesTemplate()<CR>
+"nnoremap <leader>emin :exec MyEMinutesTemplate()<CR>
 
 " vimshel
 "nnoremap <silent> <leader>vs :VimShell<CR>
@@ -505,33 +505,33 @@ endfunc
 """"""""""""""""""""""""""""""
 " My reporting function
 """"""""""""""""""""""""""""""
-func! MyDailyTemplate()
-    let b:autodate_keyword_pre = ': '
-    let b:autodate_keyword_post = '\.'
-    let b:autodate_format= '%Y-%m-%d (%a)'
-    r $CFGHOME/template/daily.vim
-endfunc
-
-func! MyWeeklyTemplate()
-    let b:autodate_keyword_pre = ': '
-    let b:autodate_keyword_post = '\.'
-    let b:autodate_format= '%Y-%m-%d (%a)'
-    r $CFGHOME/template/weekly.vim
-endfunc
-
-func! MyMinutesTemplate()
-    let b:autodate_keyword_pre = ': '
-    let b:autodate_keyword_post = ' @'
-    let b:autodate_format= '%Y-%m-%d (%a) '
-    r $CFGHOME/template/minutes.vim
-endfunc
-
-func! MyEMinutesTemplate()
-    let b:autodate_keyword_pre = 'Date: '
-    let b:autodate_keyword_post = '\.'
-    let b:autodate_format= '%Y-%3m-%d (%a) '
-    r $CFGHOME/template/eminutes.vim
-endfunc
+"func! MyDailyTemplate()
+"    let b:autodate_keyword_pre = ': '
+"    let b:autodate_keyword_post = '\.'
+"    let b:autodate_format= '%Y-%m-%d (%a)'
+"    r $CFGHOME/template/daily.vim
+"endfunc
+"
+"func! MyWeeklyTemplate()
+"    let b:autodate_keyword_pre = ': '
+"    let b:autodate_keyword_post = '\.'
+"    let b:autodate_format= '%Y-%m-%d (%a)'
+"    r $CFGHOME/template/weekly.vim
+"endfunc
+"
+"func! MyMinutesTemplate()
+"    let b:autodate_keyword_pre = ': '
+"    let b:autodate_keyword_post = ' @'
+"    let b:autodate_format= '%Y-%m-%d (%a) '
+"    r $CFGHOME/template/minutes.vim
+"endfunc
+"
+"func! MyEMinutesTemplate()
+"    let b:autodate_keyword_pre = 'Date: '
+"    let b:autodate_keyword_post = '\.'
+"    let b:autodate_format= '%Y-%3m-%d (%a) '
+"    r $CFGHOME/template/eminutes.vim
+"endfunc
 
 """"""""""""""""""""""""""""""
 " My File Types
@@ -675,4 +675,5 @@ elseif has('mac')
 elseif has('unix')
     source $CFGHOME/unix.vimrc
 endif
+
 

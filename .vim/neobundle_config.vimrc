@@ -112,3 +112,7 @@ endif
 "            \ |   setl completefunc=syntaxcomplete#Complete
 "            \ | endif
 
+""""""""""""""""""""""""""""""
+" dbext
+""""""""""""""""""""""""""""""
+let g:ftplugin_sql_omni_key = '<C-c>'
