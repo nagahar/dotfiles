@@ -16,3 +16,4 @@ endif
 "let g:Tex_CompileRule_pdf = '/opt/local/bin/dvipdfmx $*.dvi'
 "let g:Tex_ViewRule_pdf = 'open -a /Applications/Preview.app'
 
+

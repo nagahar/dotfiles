@@ -119,6 +119,8 @@ set timeoutlen=3500
 set foldmethod=syntax
 " hide buffer when abandoning
 set hidden
+" disable ime when quitting insert mode
+set imdisable
 
 """"""""""""""""""""""""""""""
 " Completion
@@ -414,7 +416,7 @@ aug END
 function! s:init_cmdwin()
     nnoremap <buffer> q :<C-u>quit<CR>
     nnoremap <buffer> <TAB> :<C-u>quit<CR>
-    inoremap <buffer><expr><CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+    "inoremap <buffer><expr><CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
     inoremap <buffer><expr><C-h> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
     inoremap <buffer><expr><BS> pumvisible() ? "\<C-y>\<C-h>" : "\<C-h>"
 

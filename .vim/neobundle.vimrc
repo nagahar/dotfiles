@@ -105,6 +105,8 @@ if g:is_neobundle_installed
 
         " fastfold
         NeoBundle 'Konfekt/FastFold.git'
+        " Dbext
+        NeoBundle 'vim-scripts/dbext.vim', '23.0'
     endif
 
     " Required:

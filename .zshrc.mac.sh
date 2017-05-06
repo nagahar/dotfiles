@@ -19,11 +19,11 @@ fi
 #    eval "$(rbenv init -)"
 #fi
 
-#MACVIM=/usr/local/Cellar/macvim-kaoriya/Head/MacVim.app
 MACVIM=/Applications/MacVim.app
 export VIMRUNTIME=$MACVIM/Contents/Resources/vim/runtime
 export EDITOR=$MACVIM/Contents/MacOS/Vim
-#export EDITOR=/usr/bin/vim
+export PGDATA=/usr/local/var/postgres
+
 alias vi="$MACVIM/Contents/MacOS/Vim $@"
 alias gvim="open -n -a $MACVIM/Contents/MacOS/MacVim"
 alias cemacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
@@ -44,24 +44,24 @@ alias cc="/usr/bin/cc -Wall -W -Wformat=2 -Wcast-qual -Wcast-align -Wconversion 
 #fi
 
 # iTerm2の場合だけ実行する
-#if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
-#    # tmuxがある場合
-#    if which tmux > /dev/null; then
-#        # tmux(mux dev)自動起動 add@2014-12-27
-#        if [ -z "$PS1" ]; then return ; fi
-#
-#        if [ -z $TMUX ] ; then
-#            if [ -z `tmux ls` ] ; then
-#                #mux dev
-#            else
-#                tmux attach
-#            fi
-#        fi
-#
-#        # tmux copy & paste add@2014-12-27
-#        if [ -n "$TMUX" ]; then
-#          alias pbcopy="reattach-to-user-namespace pbcopy"
-#        fi
-#    fi
-#fi
+if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
+    # tmuxがある場合
+    if which tmux > /dev/null; then
+        # tmux(mux dev)自動起動 add@2014-12-27
+        if [ -z "$PS1" ]; then return ; fi
+
+        if [ -z $TMUX ] ; then
+            if [ -z `tmux ls` ] ; then
+                #mux dev
+            else
+                tmux attach
+            fi
+        fi
+
+        # tmux copy & paste add@2014-12-27
+        if [ -n "$TMUX" ]; then
+          alias pbcopy="reattach-to-user-namespace pbcopy"
+        fi
+    fi
+fi
 
