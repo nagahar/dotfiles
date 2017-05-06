@@ -116,3 +116,10 @@ endif
 " dbext
 """"""""""""""""""""""""""""""
 let g:ftplugin_sql_omni_key = '<C-c>'
+" Postgresql
+"let g:dbext_default_profile_Postgres_shop = 'type=PGSQL:host=localhost:port=5432:user=:passwd=:dbname='
+" SQlServer
+"let g:dbext_default_SQLSRV_bin = 'mssql.sh'
+"let g:dbext_default_SQLSRV_cmd_options = ' '
+"let g:dbext_default_profile_Postgres_shop = 'type=SQLSRV:integratedlogin=0:host=localhost:port=1433:user=:passwd=:dbname='
+
