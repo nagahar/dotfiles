@@ -117,7 +117,7 @@ endif
 """"""""""""""""""""""""""""""
 let g:ftplugin_sql_omni_key = '<C-c>'
 " Postgresql
-"let g:dbext_default_profile_Postgres_shop = 'type=PGSQL:host=localhost:port=5432:user=:passwd=:dbname='
+let g:dbext_default_profile_Postgres_shop = 'type=PGSQL:host=localhost:port=5432:user=postgres:passwd=:dbname=shop'
 " SQlServer
 "let g:dbext_default_SQLSRV_bin = 'mssql.sh'
 "let g:dbext_default_SQLSRV_cmd_options = ' '
