@@ -116,7 +116,7 @@ set foldmethod=syntax
 " hide buffer when abandoning
 set hidden
 " disable ime when quitting insert mode
-set imdisable
+"set imdisable
 
 """"""""""""""""""""""""""""""
 " Completion
