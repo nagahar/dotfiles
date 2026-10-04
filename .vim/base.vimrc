@@ -32,9 +32,9 @@ endif
 """"""""""""""""""""""""""""""
 "auto recognition for character encoding
 "http://www.kawaz.jp/pukiwiki/?vim#cb691f26
+" 内部エンコーディングは常に utf-8（cp932 だと cp932 外の文字で判定が崩れる）
 if &encoding !=# 'utf-8'
-    set encoding=japan
-    set fileencoding=japan
+    set encoding=utf-8
 endif
 if has('iconv')
   let s:enc_euc = 'euc-jp'
@@ -50,10 +50,8 @@ if has('iconv')
   endif
   " fileencodingsを構築
   if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
-    unlet s:fileencodings_default
+    " ucs-bom → utf-8 → iso-2022-jp → euc → cp932 の順で判定
+    let &fileencodings = 'ucs-bom,utf-8,' . s:enc_jis . ',' . s:enc_euc . ',cp932,default,latin1'
   else
     let &fileencodings = &fileencodings .','. s:enc_jis
     set fileencodings+=utf-8,ucs-2le,ucs-2
